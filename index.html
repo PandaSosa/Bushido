@@ -1,0 +1,3152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bushido Car Detailing - Profesjonalne Usługi Detailingowe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #b8941f;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+            --light-gray: #333333;
+            --white: #ffffff;
+            --text-light: #cccccc;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 2px 20px rgba(212, 175, 55, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background-image: url('https://i.imgur.com/kT6q86l.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+        }
+        
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-item a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-item a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+        
+        /* Language Dropdown - UPROSZCZONE */
+        .language-dropdown {
+            position: relative;
+            z-index: 10000 !important;
+        }
+        
+        .lang-toggle {
+            background: none;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .lang-toggle:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dark-gray);
+            border: 1px solid var(--gold);
+            border-radius: 5px;
+            min-width: 150px;
+            display: none; /* UPROSZCZONE - zamiast opacity/visibility */
+            z-index: 10001 !important;
+            margin-top: 5px;
+        }
+        
+        .lang-menu.active {
+            display: block !important; /* UPROSZCZONE */
+        }
+        
+        .lang-option {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .lang-option:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(26,26,26,0.6)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23d4af37" opacity="0.05" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(212, 175, 55, 0.1) 70%, rgba(212, 175, 55, 0.2) 100%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, var(--dark-gray), var(--light-gray));
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--dark-gray);
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: linear-gradient(135deg, var(--dark-gray), var(--light-gray));
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+        
+        .price-tag {
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .price-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .price-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Contact Form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: var(--dark-gray);
+            border: 1px solid var(--gold);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            border-color: var(--dark-gold);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--dark-gray);
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            width: 40px;
+            text-align: center;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            padding: 3rem 0 1rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--gold);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://i.imgur.com/kT6q86l.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: var(--dark-gray);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                border-top: 1px solid var(--gold);
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .language-dropdown {
+                margin-right: 10px;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <div class="logo-nav">
+                <div class="logo-img"></div>
+                <div class="logo-text">Bushido</div>
+            </div>
+            
+            <nav class="navigation">
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="#home" data-translate="nav-home">Strona główna</a></li>
+                    <li class="nav-item"><a href="#services" data-translate="nav-services">Usługi</a></li>
+                    <li class="nav-item"><a href="#gallery" data-translate="nav-gallery">Galeria</a></li>
+                    <li class="nav-item"><a href="#pricing" data-translate="nav-pricing">Cennik</a></li>
+                    <li class="nav-item"><a href="#contact" data-translate="nav-contact">Kontakt</a></li>
+                </ul>
+            </nav>
+            
+            <div class="language-dropdown">
+                <button class="lang-toggle" id="langToggle">🌐 PL</button>
+                <div class="lang-menu" id="langMenu">
+                    <a href="#" class="lang-option" data-lang="pl">🇵🇱 Polski</a>
+                    <a href="#" class="lang-option" data-lang="uk">🇺🇦 Українська</a>
+                    <a href="#" class="lang-option" data-lang="ru">🇷🇺 Русский</a>
+                    <a href="#" class="lang-option" data-lang="en">🇬🇧 English</a>
+                    <a href="#" class="lang-option" data-lang="de">🇩🇪 Deutsch</a>
+                    <a href="#" class="lang-option" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" class="lang-option" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" class="lang-option" data-lang="it">🇮🇹 Italiano</a>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-translate="hero-title">Bushido Car Detailing</h1>
+            <p data-translate="hero-subtitle">Profesjonalne usługi detailingowe na najwyższym poziomie</p>
+            <a href="#contact" class="cta-button" data-translate="hero-cta">Skontaktuj się z nami</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <h2 class="section-title" data-translate="services-title">Nasze Usługi</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3 data-translate="service1-title">Mycie Premium</h3>
+                <p data-translate="service1-desc">Kompleksowe mycie zewnętrzne i wewnętrzne z najwyższej jakości produktami profesjonalnymi.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3 data-translate="service2-title">Polerowanie</h3>
+                <p data-translate="service2-desc">Usuwanie zarysowań, przywracanie blasku lakieru i ochrona przed czynnikami zewnętrznymi.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3 data-translate="service3-title">Ochrona Lakieru</h3>
+                <p data-translate="service3-desc">Aplikacja wosków, sealerów i powłok ceramicznych dla długotrwałej ochrony.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🧽</div>
+                <h3 data-translate="service4-title">Czyszczenie Wnętrz</h3>
+                <p data-translate="service4-desc">Profesjonalne czyszczenie tapicerki, skóry, plastików i elementów wykończenia.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3 data-translate="service5-title">Detailing Premium</h3>
+                <p data-translate="service5-desc">Kompleksowa renowacja pojazdu z najwyższej klasy produktami i technikami.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3 data-translate="service6-title">Konserwacja</h3>
+                <p data-translate="service6-desc">Regularna pielęgnacja i konserwacja dla zachowania idealnego stanu pojazdu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <h2 class="section-title" data-translate="gallery-title">Galeria Prac</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">Przed/Po #1</div>
+            <div class="gallery-item">Przed/Po #2</div>
+            <div class="gallery-item">Przed/Po #3</div>
+            <div class="gallery-item">Przed/Po #4</div>
+            <div class="gallery-item">Przed/Po #5</div>
+            <div class="gallery-item">Przed/Po #6</div>
+            <div class="gallery-item">Przed/Po #7</div>
+            <div class="gallery-item">Przed/Po #8</div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <h2 class="section-title" data-translate="pricing-title">Cennik</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 data-translate="package1-title">Pakiet Basic</h3>
+                <div class="price-tag">150 zł</div>
+                <ul class="price-list">
+                    <li data-translate="package1-item1">Mycie zewnętrzne</li>
+                    <li data-translate="package1-item2">Odkurzanie wnętrza</li>
+                    <li data-translate="package1-item3">Czyszczenie szyb</li>
+                    <li data-translate="package1-item4">Nabłyszczanie opon</li>
+                </ul>
+            </div>
+            
+            <div class="pricing-card">
+                <h3 data-translate="package2-title">Pakiet Premium</h3>
+                <div class="price-tag">300 zł</div>
+                <ul class="price-list">
+                    <li data-translate="package2-item1">Wszystko z pakietu Basic</li>
+                    <li data-translate="package2-item2">Czyszczenie tapicerki</li>
+                    <li data-translate="package2-item3">Polerowanie lakieru</li>
+                    <li data-translate="package2-item4">Aplikacja wosku</li>
+                    <li data-translate="package2-item5">Czyszczenie felg</li>
+                </ul>
+            </div>
+            
+            <div class="pricing-card">
+                <h3 data-translate="package3-title">Pakiet VIP</h3>
+                <div class="price-tag">500 zł</div>
+                <ul class="price-list">
+                    <li data-translate="package3-item1">Wszystko z pakietu Premium</li>
+                    <li data-translate="package3-item2">Powłoka ceramiczna</li>
+                    <li data-translate="package3-item3">Czyszczenie silnika</li>
+                    <li data-translate="package3-item4">Renowacja plastików</li>
+                    <li data-translate="package3-item5">Gwarancja 6 miesięcy</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title" data-translate="contact-title">Kontakt</h2>
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h3 data-translate="form-title">Napisz do nas</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-translate="form-name">Imię i Nazwisko</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" data-translate="form-email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" data-translate="form-phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service" data-translate="form-service">Wybierz usługę</label>
+                        <select id="service" name="service">
+                            <option value="basic" data-translate="form-service-basic">Pakiet Basic</option>
+                            <option value="premium" data-translate="form-service-premium">Pakiet Premium</option>
+                            <option value="vip" data-translate="form-service-vip">Pakiet VIP</option>
+                            <option value="custom" data-translate="form-service-custom">Usługa indywidualna</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" data-translate="form-message">Wiadomość</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" data-translate="form-submit">Wyślij wiadomość</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <h3 data-translate="contact-info-title">Informacje kontaktowe</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <strong data-translate="contact-phone">Telefon:</strong><br>
+                        +48 123 456 789
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <strong data-translate="contact-email">Email:</strong><br>
+                        info@bushidodetailing.pl
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong data-translate="contact-address">Adres:</strong><br>
+                        Zawiercie, Śląsk, Polska
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <strong data-translate="contact-hours">Godziny pracy:</strong><br>
+                        <span data-translate="contact-hours-detail">Pon-Pt: 8:00-18:00<br>Sob: 9:00-15:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-img"></div>
+                <div class="logo-text">Bushido Car Detailing</div>
+            </div>
+            <p data-translate="footer-text">&copy; 2025 Bushido Car Detailing. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - initializing menu functionality');
+            
+            // Pobieranie elementów
+            const langToggle = document.getElementById('langToggle');
+            const langMenu = document.getElementById('langMenu');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            // Debug - sprawdzenie czy elementy istnieją
+            console.log('langToggle:', langToggle);
+            console.log('langMenu:', langMenu);
+            console.log('mobileMenuToggle:', mobileMenuToggle);
+            console.log('navMenu:', navMenu);
+            
+            // Obsługa menu językowego
+            if (langToggle && langMenu) {
+                langToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    console.log('Language toggle clicked');
+                    langMenu.classList.toggle('active');
+                });
+                
+                // Zamknij menu językowe po kliknięciu gdzie indziej
+                document.addEventListener('click', function(e) {
+                    if (langMenu.classList.contains('active') && 
+                        !langToggle.contains(e.target) && 
+                        !langMenu.contains(e.target)) {
+                        langMenu.classList.remove('active');
+                        console.log('Closing language menu');
+                    }
+                });
+                
+                // Zapobiegaj zamykaniu menu po kliknięciu w opcje
+                langMenu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            } else {
+                console.error('Language menu elements not found!');
+            }
+            
+            // Obsługa menu mobilnego
+            if (mobileMenuToggle && navMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    console.log('Mobile menu toggle clicked');
+                    navMenu.classList.toggle('active');
+                });
+            } else {
+                console.error('Mobile menu elements not found!');
+            }
+            
+            // Smooth scrolling dla linków nawigacyjnych
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Zamknij menu mobilne jeśli jest otwarte
+                        if (navMenu.classList.contains('active')) {
+                            navMenu.classList.remove('active');
+                        }
+                        
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Zmiana tła header po scrollu
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Tłumaczenia (podstawowa implementacja)
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    console.log('Selected language:', lang);
+                    
+                    // Zmiana tekstu przycisku
+                    langToggle.innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+                    
+                    
+                    // alert('Zmiana języka na: ' + lang);
+                    
+                    // Zamknij menu po wyborze
+                    langMenu.classList.remove('active');
+                });
+            });
+            
+            // Obsługa formularza kontaktowego
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Dziękujemy za wiadomość! Skontaktujemy się z Tobą wkrótce.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+
+<script>
+
+
+function changeLanguage(lang) {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+        e.preventDefault();
+        const lang = this.getAttribute('data-lang');
+        changeLanguage(lang);
+        document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+        document.getElementById('langMenu').classList.remove('active');
+    });
+});
+</script>
+
+
+<script>
+const translations = {
+  pl: {
+    "nav-home": "Strona główna",
+    "nav-services": "Usługi",
+    "nav-gallery": "Galeria",
+    "nav-pricing": "Cennik",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Profesjonalne usługi detailingowe na najwyższym poziomie",
+    "hero-cta": "Skontaktuj się z nami",
+    "services-title": "Nasze Usługi",
+    "service1-title": "Mycie Premium",
+    "service1-desc": "Kompleksowe mycie zewnętrzne i wewnętrzne z najwyższej jakości produktami profesjonalnymi.",
+    "service2-title": "Polerowanie",
+    "service2-desc": "Usuwanie zarysowań, przywracanie blasku lakieru i ochrona przed czynnikami zewnętrznymi.",
+    "service3-title": "Ochrona Lakieru",
+    "service3-desc": "Aplikacja wosków, sealerów i powłok ceramicznych dla długotrwałej ochrony.",
+    "service4-title": "Czyszczenie Wnętrz",
+    "service4-desc": "Profesjonalne czyszczenie tapicerki, skóry, plastików i elementów wykończenia.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Kompleksowa renowacja pojazdu z najwyższej klasy produktami i technikami.",
+    "service6-title": "Konserwacja",
+    "service6-desc": "Regularna pielęgnacja i konserwacja dla zachowania idealnego stanu pojazdu.",
+    "gallery-title": "Galeria Prac",
+    "pricing-title": "Cennik",
+    "package1-title": "Pakiet Basic",
+    "package1-item1": "Mycie zewnętrzne",
+    "package1-item2": "Odkurzanie wnętrza",
+    "package1-item3": "Czyszczenie szyb",
+    "package1-item4": "Nabłyszczanie opon",
+    "package2-title": "Pakiet Premium",
+    "package2-item1": "Wszystko z pakietu Basic",
+    "package2-item2": "Czyszczenie tapicerki",
+    "package2-item3": "Polerowanie lakieru",
+    "package2-item4": "Aplikacja wosku",
+    "package2-item5": "Czyszczenie felg",
+    "package3-title": "Pakiet VIP",
+    "package3-item1": "Wszystko z pakietu Premium",
+    "package3-item2": "Powłoka ceramiczna",
+    "package3-item3": "Czyszczenie silnika",
+    "package3-item4": "Renowacja plastików",
+    "package3-item5": "Gwarancja 6 miesięcy",
+    "contact-title": "Kontakt",
+    "form-title": "Napisz do nas",
+    "form-name": "Imię i Nazwisko",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Wybierz usługę",
+    "form-service-basic": "Pakiet Basic",
+    "form-service-premium": "Pakiet Premium",
+    "form-service-vip": "Pakiet VIP",
+    "form-service-custom": "Usługa indywidualna",
+    "form-message": "Wiadomość",
+    "form-submit": "Wyślij wiadomość",
+    "contact-info-title": "Informacje kontaktowe",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adres:",
+    "contact-hours": "Godziny pracy:",
+    "contact-hours-detail": "Pon-Pt: 8:00-18:00\nSob: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Wszystkie prawa zastrzeżone."
+  },
+  en: {
+    "nav-home": "Home",
+    "nav-services": "Services",
+    "nav-gallery": "Gallery",
+    "nav-pricing": "Pricing",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Professional detailing services at the highest level",
+    "hero-cta": "Contact us",
+    "services-title": "Our Services",
+    "service1-title": "Premium Wash",
+    "service1-desc": "Comprehensive exterior and interior wash with top-quality professional products.",
+    "service2-title": "Polishing",
+    "service2-desc": "Scratch removal, restoring paint shine and protecting against external factors.",
+    "service3-title": "Paint Protection",
+    "service3-desc": "Application of waxes, sealants, and ceramic coatings for long-lasting protection.",
+    "service4-title": "Interior Cleaning",
+    "service4-desc": "Professional cleaning of upholstery, leather, plastics, and trim elements.",
+    "service5-title": "Premium Detailing",
+    "service5-desc": "Comprehensive vehicle restoration with top-class products and techniques.",
+    "service6-title": "Maintenance",
+    "service6-desc": "Regular care and maintenance to keep the vehicle in perfect condition.",
+    "gallery-title": "Work Gallery",
+    "pricing-title": "Pricing",
+    "package1-title": "Basic Package",
+    "package1-item1": "Exterior wash",
+    "package1-item2": "Interior vacuuming",
+    "package1-item3": "Window cleaning",
+    "package1-item4": "Tire shining",
+    "package2-title": "Premium Package",
+    "package2-item1": "Everything from Basic",
+    "package2-item2": "Upholstery cleaning",
+    "package2-item3": "Paint polishing",
+    "package2-item4": "Wax application",
+    "package2-item5": "Wheel cleaning",
+    "package3-title": "VIP Package",
+    "package3-item1": "Everything from Premium",
+    "package3-item2": "Ceramic coating",
+    "package3-item3": "Engine cleaning",
+    "package3-item4": "Plastic restoration",
+    "package3-item5": "6-month warranty",
+    "contact-title": "Contact",
+    "form-title": "Write to us",
+    "form-name": "Full Name",
+    "form-email": "Email",
+    "form-phone": "Phone",
+    "form-service": "Choose service",
+    "form-service-basic": "Basic Package",
+    "form-service-premium": "Premium Package",
+    "form-service-vip": "VIP Package",
+    "form-service-custom": "Custom Service",
+    "form-message": "Message",
+    "form-submit": "Send Message",
+    "contact-info-title": "Contact Information",
+    "contact-phone": "Phone:",
+    "contact-email": "Email:",
+    "contact-address": "Address:",
+    "contact-hours": "Working hours:",
+    "contact-hours-detail": "Mon-Fri: 8:00-18:00\nSat: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. All rights reserved."
+  },
+  uk: {
+    "nav-home": "Головна",
+    "nav-services": "Послуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Ціни",
+    "nav-contact": "Контакт",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Професійні послуги детейлінгу на найвищому рівні",
+    "hero-cta": "Зв'яжіться з нами",
+    "services-title": "Наші Послуги",
+    "service1-title": "Преміум Мийка",
+    "service1-desc": "Комплексне зовнішнє та внутрішнє миття з використанням професійних засобів найвищої якості.",
+    "service2-title": "Полірування",
+    "service2-desc": "Видалення подряпин, відновлення блиску лакофарбового покриття та захист від зовнішніх факторів.",
+    "service3-title": "Захист Лаку",
+    "service3-desc": "Нанесення восків, герметиків і керамічних покриттів для тривалого захисту.",
+    "service4-title": "Чистка Салону",
+    "service4-desc": "Професійне очищення оббивки, шкіри, пластику та елементів оздоблення.",
+    "service5-title": "Преміум Детейлінг",
+    "service5-desc": "Комплексне відновлення автомобіля з використанням найкращих продуктів і технік.",
+    "service6-title": "Обслуговування",
+    "service6-desc": "Регулярний догляд і технічне обслуговування для підтримання ідеального стану автомобіля.",
+    "gallery-title": "Галерея Робіт",
+    "pricing-title": "Ціни",
+    "package1-title": "Базовий Пакет",
+    "package1-item1": "Зовнішнє миття",
+    "package1-item2": "Прибирання салону",
+    "package1-item3": "Очищення вікон",
+    "package1-item4": "Блиск шин",
+    "package2-title": "Пакет Преміум",
+    "package2-item1": "Все з Базового пакету",
+    "package2-item2": "Чистка оббивки",
+    "package2-item3": "Полірування лаку",
+    "package2-item4": "Нанесення воску",
+    "package2-item5": "Чистка дисків",
+    "package3-title": "Пакет VIP",
+    "package3-item1": "Все з Преміум пакету",
+    "package3-item2": "Керамічне покриття",
+    "package3-item3": "Чистка двигуна",
+    "package3-item4": "Відновлення пластику",
+    "package3-item5": "Гарантія 6 місяців",
+    "contact-title": "Контакт",
+    "form-title": "Напишіть нам",
+    "form-name": "Ім'я та прізвище",
+    "form-email": "Електронна пошта",
+    "form-phone": "Телефон",
+    "form-service": "Виберіть послугу",
+    "form-service-basic": "Базовий пакет",
+    "form-service-premium": "Пакет Преміум",
+    "form-service-vip": "Пакет VIP",
+    "form-service-custom": "Індивідуальна послуга",
+    "form-message": "Повідомлення",
+    "form-submit": "Надіслати повідомлення",
+    "contact-info-title": "Контактна інформація",
+    "contact-phone": "Телефон:",
+    "contact-email": "Електронна пошта:",
+    "contact-address": "Адреса:",
+    "contact-hours": "Години роботи:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Всі права захищені."
+  },
+  ru: {
+    "nav-home": "Главная",
+    "nav-services": "Услуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Цены",
+    "nav-contact": "Контакты",
+    "hero-title": "Bushido Детейлинг",
+    "hero-subtitle": "Профессиональные услуги детейлинга на высшем уровне",
+    "hero-cta": "Свяжитесь с нами",
+    "services-title": "Наши Услуги",
+    "service1-title": "Премиум Мойка",
+    "service1-desc": "Комплексная мойка снаружи и внутри с использованием лучших профессиональных средств.",
+    "service2-title": "Полировка",
+    "service2-desc": "Удаление царапин, восстановление блеска и защита от внешних факторов.",
+    "service3-title": "Защита ЛКП",
+    "service3-desc": "Нанесение восков, герметиков и керамических покрытий для длительной защиты.",
+    "service4-title": "Чистка Салона",
+    "service4-desc": "Профессиональная чистка обивки, кожи, пластика и декоративных элементов.",
+    "service5-title": "Премиум Детейлинг",
+    "service5-desc": "Комплексная реставрация автомобиля с лучшими продуктами и техниками.",
+    "service6-title": "Обслуживание",
+    "service6-desc": "Регулярный уход и обслуживание для поддержания идеального состояния автомобиля.",
+    "gallery-title": "Галерея Работ",
+    "pricing-title": "Цены",
+    "package1-title": "Базовый Пакет",
+    "package1-item1": "Наружная мойка",
+    "package1-item2": "Уборка салона",
+    "package1-item3": "Чистка стекол",
+    "package1-item4": "Уход за шинами",
+    "package2-title": "Премиум Пакет",
+    "package2-item1": "Все из Базового пакета",
+    "package2-item2": "Чистка обивки",
+    "package2-item3": "Полировка ЛКП",
+    "package2-item4": "Нанесение воска",
+    "package2-item5": "Чистка дисков",
+    "package3-title": "VIP Пакет",
+    "package3-item1": "Все из Премиум пакета",
+    "package3-item2": "Керамическое покрытие",
+    "package3-item3": "Чистка двигателя",
+    "package3-item4": "Реставрация пластика",
+    "package3-item5": "Гарантия 6 месяцев",
+    "contact-title": "Контакты",
+    "form-title": "Напишите нам",
+    "form-name": "Имя и Фамилия",
+    "form-email": "Email",
+    "form-phone": "Телефон",
+    "form-service": "Выберите услугу",
+    "form-service-basic": "Базовый пакет",
+    "form-service-premium": "Премиум пакет",
+    "form-service-vip": "VIP пакет",
+    "form-service-custom": "Индивидуальная услуга",
+    "form-message": "Сообщение",
+    "form-submit": "Отправить",
+    "contact-info-title": "Контактная информация",
+    "contact-phone": "Телефон:",
+    "contact-email": "Email:",
+    "contact-address": "Адрес:",
+    "contact-hours": "Часы работы:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Все права защищены."
+  },
+  de: {
+    "nav-home": "Startseite",
+    "nav-services": "Dienstleistungen",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Preise",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Autopflege",
+    "hero-subtitle": "Professionelle Detailing-Dienstleistungen auf höchstem Niveau",
+    "hero-cta": "Kontaktieren Sie uns",
+    "services-title": "Unsere Dienstleistungen",
+    "service1-title": "Premiumwäsche",
+    "service1-desc": "Umfassende Außen- und Innenwäsche mit hochwertigen Profi-Produkten.",
+    "service2-title": "Polieren",
+    "service2-desc": "Entfernung von Kratzern, Wiederherstellung des Lackglanzes und Schutz vor äußeren Einflüssen.",
+    "service3-title": "Lackschutz",
+    "service3-desc": "Auftragen von Wachsen, Versiegelungen und Keramikbeschichtungen für langanhaltenden Schutz.",
+    "service4-title": "Innenreinigung",
+    "service4-desc": "Professionelle Reinigung von Polstern, Leder, Kunststoffen und Verkleidungselementen.",
+    "service5-title": "Premium-Detailing",
+    "service5-desc": "Umfassende Fahrzeugaufbereitung mit den besten Produkten und Techniken.",
+    "service6-title": "Wartung",
+    "service6-desc": "Regelmäßige Pflege und Wartung zur Erhaltung des perfekten Zustands.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Preise",
+    "package1-title": "Basic-Paket",
+    "package1-item1": "Außenwäsche",
+    "package1-item2": "Innenreinigung",
+    "package1-item3": "Fensterreinigung",
+    "package1-item4": "Reifenpflege",
+    "package2-title": "Premium-Paket",
+    "package2-item1": "Alles aus dem Basic-Paket",
+    "package2-item2": "Polsterreinigung",
+    "package2-item3": "Lackpolitur",
+    "package2-item4": "Wachsauftrag",
+    "package2-item5": "Felgenreinigung",
+    "package3-title": "VIP-Paket",
+    "package3-item1": "Alles aus dem Premium-Paket",
+    "package3-item2": "Keramikbeschichtung",
+    "package3-item3": "Motorreinigung",
+    "package3-item4": "Kunststoffrestaurierung",
+    "package3-item5": "6 Monate Garantie",
+    "contact-title": "Kontakt",
+    "form-title": "Schreiben Sie uns",
+    "form-name": "Vor- und Nachname",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Dienstleistung auswählen",
+    "form-service-basic": "Basic-Paket",
+    "form-service-premium": "Premium-Paket",
+    "form-service-vip": "VIP-Paket",
+    "form-service-custom": "Individueller Service",
+    "form-message": "Nachricht",
+    "form-submit": "Nachricht senden",
+    "contact-info-title": "Kontaktinformationen",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Öffnungszeiten:",
+    "contact-hours-detail": "Mo-Fr: 8:00-18:00\nSa: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Alle Rechte vorbehalten."
+  },
+  es: {
+    "nav-home": "Inicio",
+    "nav-services": "Servicios",
+    "nav-gallery": "Galería",
+    "nav-pricing": "Precios",
+    "nav-contact": "Contacto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servicios profesionales de detailing al más alto nivel",
+    "hero-cta": "Contáctanos",
+    "services-title": "Nuestros Servicios",
+    "service1-title": "Lavado Premium",
+    "service1-desc": "Lavado completo exterior e interior con productos profesionales de alta calidad.",
+    "service2-title": "Pulido",
+    "service2-desc": "Eliminación de arañazos, restauración del brillo de la pintura y protección contra factores externos.",
+    "service3-title": "Protección de Pintura",
+    "service3-desc": "Aplicación de ceras, selladores y recubrimientos cerámicos para una protección duradera.",
+    "service4-title": "Limpieza Interior",
+    "service4-desc": "Limpieza profesional de tapicería, cuero, plásticos y elementos de acabado.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauración integral del vehículo con los mejores productos y técnicas.",
+    "service6-title": "Mantenimiento",
+    "service6-desc": "Cuidado y mantenimiento regular para mantener el vehículo en perfecto estado.",
+    "gallery-title": "Galería de Trabajos",
+    "pricing-title": "Precios",
+    "package1-title": "Paquete Básico",
+    "package1-item1": "Lavado exterior",
+    "package1-item2": "Aspirado interior",
+    "package1-item3": "Limpieza de cristales",
+    "package1-item4": "Brillo de neumáticos",
+    "package2-title": "Paquete Premium",
+    "package2-item1": "Todo del Paquete Básico",
+    "package2-item2": "Limpieza de tapicería",
+    "package2-item3": "Pulido de pintura",
+    "package2-item4": "Aplicación de cera",
+    "package2-item5": "Limpieza de llantas",
+    "package3-title": "Paquete VIP",
+    "package3-item1": "Todo del Paquete Premium",
+    "package3-item2": "Recubrimiento cerámico",
+    "package3-item3": "Limpieza del motor",
+    "package3-item4": "Restauración de plásticos",
+    "package3-item5": "Garantía de 6 meses",
+    "contact-title": "Contacto",
+    "form-title": "Escríbenos",
+    "form-name": "Nombre y Apellido",
+    "form-email": "Email",
+    "form-phone": "Teléfono",
+    "form-service": "Selecciona un servicio",
+    "form-service-basic": "Paquete Básico",
+    "form-service-premium": "Paquete Premium",
+    "form-service-vip": "Paquete VIP",
+    "form-service-custom": "Servicio personalizado",
+    "form-message": "Mensaje",
+    "form-submit": "Enviar mensaje",
+    "contact-info-title": "Información de contacto",
+    "contact-phone": "Teléfono:",
+    "contact-email": "Email:",
+    "contact-address": "Dirección:",
+    "contact-hours": "Horario:",
+    "contact-hours-detail": "Lun-Vie: 8:00-18:00\nSáb: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Todos los derechos reservados."
+  },
+  fr: {
+    "nav-home": "Accueil",
+    "nav-services": "Services",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Tarifs",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Services de detailing professionnels au plus haut niveau",
+    "hero-cta": "Contactez-nous",
+    "services-title": "Nos Services",
+    "service1-title": "Lavage Premium",
+    "service1-desc": "Lavage complet extérieur et intérieur avec des produits professionnels de haute qualité.",
+    "service2-title": "Polissage",
+    "service2-desc": "Élimination des rayures, restauration de l'éclat de la peinture et protection contre les agressions extérieures.",
+    "service3-title": "Protection de Peinture",
+    "service3-desc": "Application de cires, scellants et revêtements céramiques pour une protection durable.",
+    "service4-title": "Nettoyage Intérieur",
+    "service4-desc": "Nettoyage professionnel des tissus, cuirs, plastiques et éléments de finition.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauration complète du véhicule avec les meilleurs produits et techniques.",
+    "service6-title": "Entretien",
+    "service6-desc": "Entretien régulier pour garder le véhicule en parfait état.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Tarifs",
+    "package1-title": "Forfait Basique",
+    "package1-item1": "Lavage extérieur",
+    "package1-item2": "Aspiration intérieure",
+    "package1-item3": "Nettoyage des vitres",
+    "package1-item4": "Brillance des pneus",
+    "package2-title": "Forfait Premium",
+    "package2-item1": "Tout du Forfait Basique",
+    "package2-item2": "Nettoyage des tissus",
+    "package2-item3": "Polissage de la peinture",
+    "package2-item4": "Application de cire",
+    "package2-item5": "Nettoyage des jantes",
+    "package3-title": "Forfait VIP",
+    "package3-item1": "Tout du Forfait Premium",
+    "package3-item2": "Revêtement céramique",
+    "package3-item3": "Nettoyage du moteur",
+    "package3-item4": "Restauration des plastiques",
+    "package3-item5": "Garantie 6 mois",
+    "contact-title": "Contact",
+    "form-title": "Écrivez-nous",
+    "form-name": "Nom et Prénom",
+    "form-email": "Email",
+    "form-phone": "Téléphone",
+    "form-service": "Choisissez un service",
+    "form-service-basic": "Forfait Basique",
+    "form-service-premium": "Forfait Premium",
+    "form-service-vip": "Forfait VIP",
+    "form-service-custom": "Service personnalisé",
+    "form-message": "Message",
+    "form-submit": "Envoyer",
+    "contact-info-title": "Informations de contact",
+    "contact-phone": "Téléphone:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Horaires:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSam: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tous droits réservés."
+  },
+  it: {
+    "nav-home": "Home",
+    "nav-services": "Servizi",
+    "nav-gallery": "Galleria",
+    "nav-pricing": "Prezzi",
+    "nav-contact": "Contatto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servizi di detailing professionale al massimo livello",
+    "hero-cta": "Contattaci",
+    "services-title": "I Nostri Servizi",
+    "service1-title": "Lavaggio Premium",
+    "service1-desc": "Lavaggio completo esterno ed interno con prodotti professionali di alta qualità.",
+    "service2-title": "Lucidatura",
+    "service2-desc": "Rimozione graffi, ripristino della brillantezza della vernice e protezione dagli agenti esterni.",
+    "service3-title": "Protezione Vernice",
+    "service3-desc": "Applicazione di cere, sigillanti e rivestimenti ceramici per una protezione duratura.",
+    "service4-title": "Pulizia Interni",
+    "service4-desc": "Pulizia professionale di tappezzeria, pelle, plastica ed elementi di finitura.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauro completo del veicolo con i migliori prodotti e tecniche.",
+    "service6-title": "Manutenzione",
+    "service6-desc": "Cura e manutenzione regolare per mantenere il veicolo in condizioni perfette.",
+    "gallery-title": "Galleria",
+    "pricing-title": "Prezzi",
+    "package1-title": "Pacchetto Base",
+    "package1-item1": "Lavaggio esterno",
+    "package1-item2": "Aspirazione interna",
+    "package1-item3": "Pulizia vetri",
+    "package1-item4": "Cura pneumatici",
+    "package2-title": "Pacchetto Premium",
+    "package2-item1": "Tutto dal Pacchetto Base",
+    "package2-item2": "Pulizia tappezzeria",
+    "package2-item3": "Lucidatura vernice",
+    "package2-item4": "Applicazione cera",
+    "package2-item5": "Pulizia cerchi",
+    "package3-title": "Pacchetto VIP",
+    "package3-item1": "Tutto dal Pacchetto Premium",
+    "package3-item2": "Rivestimento ceramico",
+    "package3-item3": "Pulizia motore",
+    "package3-item4": "Restauro plastiche",
+    "package3-item5": "Garanzia 6 mesi",
+    "contact-title": "Contatto",
+    "form-title": "Scrivici",
+    "form-name": "Nome e Cognome",
+    "form-email": "Email",
+    "form-phone": "Telefono",
+    "form-service": "Scegli servizio",
+    "form-service-basic": "Pacchetto Base",
+    "form-service-premium": "Pacchetto Premium",
+    "form-service-vip": "Pacchetto VIP",
+    "form-service-custom": "Servizio personalizzato",
+    "form-message": "Messaggio",
+    "form-submit": "Invia",
+    "contact-info-title": "Informazioni di contatto",
+    "contact-phone": "Telefono:",
+    "contact-email": "Email:",
+    "contact-address": "Indirizzo:",
+    "contact-hours": "Orari:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSab: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tutti i diritti riservati."
+  }
+};
+
+function changeLanguage(lang) {
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-translate');
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', function(e) {
+    e.preventDefault();
+    const lang = this.getAttribute('data-lang');
+    changeLanguage(lang);
+    if (document.getElementById('langToggle')) {
+      document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+    }
+    if (document.getElementById('langMenu')) {
+      document.getElementById('langMenu').classList.remove('active');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+  changeLanguage(savedLang);
+});
+</script>
+
+</body>
+</html>
+<script>
+
+
+function changeLanguage(lang) {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+    // Zapamiętaj w localStorage
+    localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+        e.preventDefault();
+        const lang = this.getAttribute('data-lang');
+        changeLanguage(lang);
+        document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+        document.getElementById('langMenu').classList.remove('active');
+    });
+});
+
+// Przy ładowaniu strony sprawdzamy localStorage
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+    changeLanguage(savedLang);
+});
+</script>
+
+
+<script>
+const translations = {
+  pl: {
+    "nav-home": "Strona główna",
+    "nav-services": "Usługi",
+    "nav-gallery": "Galeria",
+    "nav-pricing": "Cennik",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Profesjonalne usługi detailingowe na najwyższym poziomie",
+    "hero-cta": "Skontaktuj się z nami",
+    "services-title": "Nasze Usługi",
+    "service1-title": "Mycie Premium",
+    "service1-desc": "Kompleksowe mycie zewnętrzne i wewnętrzne z najwyższej jakości produktami profesjonalnymi.",
+    "service2-title": "Polerowanie",
+    "service2-desc": "Usuwanie zarysowań, przywracanie blasku lakieru i ochrona przed czynnikami zewnętrznymi.",
+    "service3-title": "Ochrona Lakieru",
+    "service3-desc": "Aplikacja wosków, sealerów i powłok ceramicznych dla długotrwałej ochrony.",
+    "service4-title": "Czyszczenie Wnętrz",
+    "service4-desc": "Profesjonalne czyszczenie tapicerki, skóry, plastików i elementów wykończenia.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Kompleksowa renowacja pojazdu z najwyższej klasy produktami i technikami.",
+    "service6-title": "Konserwacja",
+    "service6-desc": "Regularna pielęgnacja i konserwacja dla zachowania idealnego stanu pojazdu.",
+    "gallery-title": "Galeria Prac",
+    "pricing-title": "Cennik",
+    "package1-title": "Pakiet Basic",
+    "package1-item1": "Mycie zewnętrzne",
+    "package1-item2": "Odkurzanie wnętrza",
+    "package1-item3": "Czyszczenie szyb",
+    "package1-item4": "Nabłyszczanie opon",
+    "package2-title": "Pakiet Premium",
+    "package2-item1": "Wszystko z pakietu Basic",
+    "package2-item2": "Czyszczenie tapicerki",
+    "package2-item3": "Polerowanie lakieru",
+    "package2-item4": "Aplikacja wosku",
+    "package2-item5": "Czyszczenie felg",
+    "package3-title": "Pakiet VIP",
+    "package3-item1": "Wszystko z pakietu Premium",
+    "package3-item2": "Powłoka ceramiczna",
+    "package3-item3": "Czyszczenie silnika",
+    "package3-item4": "Renowacja plastików",
+    "package3-item5": "Gwarancja 6 miesięcy",
+    "contact-title": "Kontakt",
+    "form-title": "Napisz do nas",
+    "form-name": "Imię i Nazwisko",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Wybierz usługę",
+    "form-service-basic": "Pakiet Basic",
+    "form-service-premium": "Pakiet Premium",
+    "form-service-vip": "Pakiet VIP",
+    "form-service-custom": "Usługa indywidualna",
+    "form-message": "Wiadomość",
+    "form-submit": "Wyślij wiadomość",
+    "contact-info-title": "Informacje kontaktowe",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adres:",
+    "contact-hours": "Godziny pracy:",
+    "contact-hours-detail": "Pon-Pt: 8:00-18:00\nSob: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Wszystkie prawa zastrzeżone."
+  },
+  en: {
+    "nav-home": "Home",
+    "nav-services": "Services",
+    "nav-gallery": "Gallery",
+    "nav-pricing": "Pricing",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Professional detailing services at the highest level",
+    "hero-cta": "Contact us",
+    "services-title": "Our Services",
+    "service1-title": "Premium Wash",
+    "service1-desc": "Comprehensive exterior and interior wash with top-quality professional products.",
+    "service2-title": "Polishing",
+    "service2-desc": "Scratch removal, restoring paint shine and protecting against external factors.",
+    "service3-title": "Paint Protection",
+    "service3-desc": "Application of waxes, sealants, and ceramic coatings for long-lasting protection.",
+    "service4-title": "Interior Cleaning",
+    "service4-desc": "Professional cleaning of upholstery, leather, plastics, and trim elements.",
+    "service5-title": "Premium Detailing",
+    "service5-desc": "Comprehensive vehicle restoration with top-class products and techniques.",
+    "service6-title": "Maintenance",
+    "service6-desc": "Regular care and maintenance to keep the vehicle in perfect condition.",
+    "gallery-title": "Work Gallery",
+    "pricing-title": "Pricing",
+    "package1-title": "Basic Package",
+    "package1-item1": "Exterior wash",
+    "package1-item2": "Interior vacuuming",
+    "package1-item3": "Window cleaning",
+    "package1-item4": "Tire shining",
+    "package2-title": "Premium Package",
+    "package2-item1": "Everything from Basic",
+    "package2-item2": "Upholstery cleaning",
+    "package2-item3": "Paint polishing",
+    "package2-item4": "Wax application",
+    "package2-item5": "Wheel cleaning",
+    "package3-title": "VIP Package",
+    "package3-item1": "Everything from Premium",
+    "package3-item2": "Ceramic coating",
+    "package3-item3": "Engine cleaning",
+    "package3-item4": "Plastic restoration",
+    "package3-item5": "6-month warranty",
+    "contact-title": "Contact",
+    "form-title": "Write to us",
+    "form-name": "Full Name",
+    "form-email": "Email",
+    "form-phone": "Phone",
+    "form-service": "Choose service",
+    "form-service-basic": "Basic Package",
+    "form-service-premium": "Premium Package",
+    "form-service-vip": "VIP Package",
+    "form-service-custom": "Custom Service",
+    "form-message": "Message",
+    "form-submit": "Send Message",
+    "contact-info-title": "Contact Information",
+    "contact-phone": "Phone:",
+    "contact-email": "Email:",
+    "contact-address": "Address:",
+    "contact-hours": "Working hours:",
+    "contact-hours-detail": "Mon-Fri: 8:00-18:00\nSat: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. All rights reserved."
+  },
+  uk: {
+    "nav-home": "Головна",
+    "nav-services": "Послуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Ціни",
+    "nav-contact": "Контакт",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Професійні послуги детейлінгу на найвищому рівні",
+    "hero-cta": "Зв'яжіться з нами",
+    "services-title": "Наші Послуги",
+    "service1-title": "Преміум Мийка",
+    "service1-desc": "Комплексне зовнішнє та внутрішнє миття з використанням професійних засобів найвищої якості.",
+    "service2-title": "Полірування",
+    "service2-desc": "Видалення подряпин, відновлення блиску лакофарбового покриття та захист від зовнішніх факторів.",
+    "service3-title": "Захист Лаку",
+    "service3-desc": "Нанесення восків, герметиків і керамічних покриттів для тривалого захисту.",
+    "service4-title": "Чистка Салону",
+    "service4-desc": "Професійне очищення оббивки, шкіри, пластику та елементів оздоблення.",
+    "service5-title": "Преміум Детейлінг",
+    "service5-desc": "Комплексне відновлення автомобіля з використанням найкращих продуктів і технік.",
+    "service6-title": "Обслуговування",
+    "service6-desc": "Регулярний догляд і технічне обслуговування для підтримання ідеального стану автомобіля.",
+    "gallery-title": "Галерея Робіт",
+    "pricing-title": "Ціни",
+    "package1-title": "Базовий Пакет",
+    "package1-item1": "Зовнішнє миття",
+    "package1-item2": "Прибирання салону",
+    "package1-item3": "Очищення вікон",
+    "package1-item4": "Блиск шин",
+    "package2-title": "Пакет Преміум",
+    "package2-item1": "Все з Базового пакету",
+    "package2-item2": "Чистка оббивки",
+    "package2-item3": "Полірування лаку",
+    "package2-item4": "Нанесення воску",
+    "package2-item5": "Чистка дисків",
+    "package3-title": "Пакет VIP",
+    "package3-item1": "Все з Преміум пакету",
+    "package3-item2": "Керамічне покриття",
+    "package3-item3": "Чистка двигуна",
+    "package3-item4": "Відновлення пластику",
+    "package3-item5": "Гарантія 6 місяців",
+    "contact-title": "Контакт",
+    "form-title": "Напишіть нам",
+    "form-name": "Ім'я та прізвище",
+    "form-email": "Електронна пошта",
+    "form-phone": "Телефон",
+    "form-service": "Виберіть послугу",
+    "form-service-basic": "Базовий пакет",
+    "form-service-premium": "Пакет Преміум",
+    "form-service-vip": "Пакет VIP",
+    "form-service-custom": "Індивідуальна послуга",
+    "form-message": "Повідомлення",
+    "form-submit": "Надіслати повідомлення",
+    "contact-info-title": "Контактна інформація",
+    "contact-phone": "Телефон:",
+    "contact-email": "Електронна пошта:",
+    "contact-address": "Адреса:",
+    "contact-hours": "Години роботи:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Всі права захищені."
+  },
+  ru: {
+    "nav-home": "Главная",
+    "nav-services": "Услуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Цены",
+    "nav-contact": "Контакты",
+    "hero-title": "Bushido Детейлинг",
+    "hero-subtitle": "Профессиональные услуги детейлинга на высшем уровне",
+    "hero-cta": "Свяжитесь с нами",
+    "services-title": "Наши Услуги",
+    "service1-title": "Премиум Мойка",
+    "service1-desc": "Комплексная мойка снаружи и внутри с использованием лучших профессиональных средств.",
+    "service2-title": "Полировка",
+    "service2-desc": "Удаление царапин, восстановление блеска и защита от внешних факторов.",
+    "service3-title": "Защита ЛКП",
+    "service3-desc": "Нанесение восков, герметиков и керамических покрытий для длительной защиты.",
+    "service4-title": "Чистка Салона",
+    "service4-desc": "Профессиональная чистка обивки, кожи, пластика и декоративных элементов.",
+    "service5-title": "Премиум Детейлинг",
+    "service5-desc": "Комплексная реставрация автомобиля с лучшими продуктами и техниками.",
+    "service6-title": "Обслуживание",
+    "service6-desc": "Регулярный уход и обслуживание для поддержания идеального состояния автомобиля.",
+    "gallery-title": "Галерея Работ",
+    "pricing-title": "Цены",
+    "package1-title": "Базовый Пакет",
+    "package1-item1": "Наружная мойка",
+    "package1-item2": "Уборка салона",
+    "package1-item3": "Чистка стекол",
+    "package1-item4": "Уход за шинами",
+    "package2-title": "Премиум Пакет",
+    "package2-item1": "Все из Базового пакета",
+    "package2-item2": "Чистка обивки",
+    "package2-item3": "Полировка ЛКП",
+    "package2-item4": "Нанесение воска",
+    "package2-item5": "Чистка дисков",
+    "package3-title": "VIP Пакет",
+    "package3-item1": "Все из Премиум пакета",
+    "package3-item2": "Керамическое покрытие",
+    "package3-item3": "Чистка двигателя",
+    "package3-item4": "Реставрация пластика",
+    "package3-item5": "Гарантия 6 месяцев",
+    "contact-title": "Контакты",
+    "form-title": "Напишите нам",
+    "form-name": "Имя и Фамилия",
+    "form-email": "Email",
+    "form-phone": "Телефон",
+    "form-service": "Выберите услугу",
+    "form-service-basic": "Базовый пакет",
+    "form-service-premium": "Премиум пакет",
+    "form-service-vip": "VIP пакет",
+    "form-service-custom": "Индивидуальная услуга",
+    "form-message": "Сообщение",
+    "form-submit": "Отправить",
+    "contact-info-title": "Контактная информация",
+    "contact-phone": "Телефон:",
+    "contact-email": "Email:",
+    "contact-address": "Адрес:",
+    "contact-hours": "Часы работы:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Все права защищены."
+  },
+  de: {
+    "nav-home": "Startseite",
+    "nav-services": "Dienstleistungen",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Preise",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Autopflege",
+    "hero-subtitle": "Professionelle Detailing-Dienstleistungen auf höchstem Niveau",
+    "hero-cta": "Kontaktieren Sie uns",
+    "services-title": "Unsere Dienstleistungen",
+    "service1-title": "Premiumwäsche",
+    "service1-desc": "Umfassende Außen- und Innenwäsche mit hochwertigen Profi-Produkten.",
+    "service2-title": "Polieren",
+    "service2-desc": "Entfernung von Kratzern, Wiederherstellung des Lackglanzes und Schutz vor äußeren Einflüssen.",
+    "service3-title": "Lackschutz",
+    "service3-desc": "Auftragen von Wachsen, Versiegelungen und Keramikbeschichtungen für langanhaltenden Schutz.",
+    "service4-title": "Innenreinigung",
+    "service4-desc": "Professionelle Reinigung von Polstern, Leder, Kunststoffen und Verkleidungselementen.",
+    "service5-title": "Premium-Detailing",
+    "service5-desc": "Umfassende Fahrzeugaufbereitung mit den besten Produkten und Techniken.",
+    "service6-title": "Wartung",
+    "service6-desc": "Regelmäßige Pflege und Wartung zur Erhaltung des perfekten Zustands.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Preise",
+    "package1-title": "Basic-Paket",
+    "package1-item1": "Außenwäsche",
+    "package1-item2": "Innenreinigung",
+    "package1-item3": "Fensterreinigung",
+    "package1-item4": "Reifenpflege",
+    "package2-title": "Premium-Paket",
+    "package2-item1": "Alles aus dem Basic-Paket",
+    "package2-item2": "Polsterreinigung",
+    "package2-item3": "Lackpolitur",
+    "package2-item4": "Wachsauftrag",
+    "package2-item5": "Felgenreinigung",
+    "package3-title": "VIP-Paket",
+    "package3-item1": "Alles aus dem Premium-Paket",
+    "package3-item2": "Keramikbeschichtung",
+    "package3-item3": "Motorreinigung",
+    "package3-item4": "Kunststoffrestaurierung",
+    "package3-item5": "6 Monate Garantie",
+    "contact-title": "Kontakt",
+    "form-title": "Schreiben Sie uns",
+    "form-name": "Vor- und Nachname",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Dienstleistung auswählen",
+    "form-service-basic": "Basic-Paket",
+    "form-service-premium": "Premium-Paket",
+    "form-service-vip": "VIP-Paket",
+    "form-service-custom": "Individueller Service",
+    "form-message": "Nachricht",
+    "form-submit": "Nachricht senden",
+    "contact-info-title": "Kontaktinformationen",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Öffnungszeiten:",
+    "contact-hours-detail": "Mo-Fr: 8:00-18:00\nSa: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Alle Rechte vorbehalten."
+  },
+  es: {
+    "nav-home": "Inicio",
+    "nav-services": "Servicios",
+    "nav-gallery": "Galería",
+    "nav-pricing": "Precios",
+    "nav-contact": "Contacto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servicios profesionales de detailing al más alto nivel",
+    "hero-cta": "Contáctanos",
+    "services-title": "Nuestros Servicios",
+    "service1-title": "Lavado Premium",
+    "service1-desc": "Lavado completo exterior e interior con productos profesionales de alta calidad.",
+    "service2-title": "Pulido",
+    "service2-desc": "Eliminación de arañazos, restauración del brillo de la pintura y protección contra factores externos.",
+    "service3-title": "Protección de Pintura",
+    "service3-desc": "Aplicación de ceras, selladores y recubrimientos cerámicos para una protección duradera.",
+    "service4-title": "Limpieza Interior",
+    "service4-desc": "Limpieza profesional de tapicería, cuero, plásticos y elementos de acabado.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauración integral del vehículo con los mejores productos y técnicas.",
+    "service6-title": "Mantenimiento",
+    "service6-desc": "Cuidado y mantenimiento regular para mantener el vehículo en perfecto estado.",
+    "gallery-title": "Galería de Trabajos",
+    "pricing-title": "Precios",
+    "package1-title": "Paquete Básico",
+    "package1-item1": "Lavado exterior",
+    "package1-item2": "Aspirado interior",
+    "package1-item3": "Limpieza de cristales",
+    "package1-item4": "Brillo de neumáticos",
+    "package2-title": "Paquete Premium",
+    "package2-item1": "Todo del Paquete Básico",
+    "package2-item2": "Limpieza de tapicería",
+    "package2-item3": "Pulido de pintura",
+    "package2-item4": "Aplicación de cera",
+    "package2-item5": "Limpieza de llantas",
+    "package3-title": "Paquete VIP",
+    "package3-item1": "Todo del Paquete Premium",
+    "package3-item2": "Recubrimiento cerámico",
+    "package3-item3": "Limpieza del motor",
+    "package3-item4": "Restauración de plásticos",
+    "package3-item5": "Garantía de 6 meses",
+    "contact-title": "Contacto",
+    "form-title": "Escríbenos",
+    "form-name": "Nombre y Apellido",
+    "form-email": "Email",
+    "form-phone": "Teléfono",
+    "form-service": "Selecciona un servicio",
+    "form-service-basic": "Paquete Básico",
+    "form-service-premium": "Paquete Premium",
+    "form-service-vip": "Paquete VIP",
+    "form-service-custom": "Servicio personalizado",
+    "form-message": "Mensaje",
+    "form-submit": "Enviar mensaje",
+    "contact-info-title": "Información de contacto",
+    "contact-phone": "Teléfono:",
+    "contact-email": "Email:",
+    "contact-address": "Dirección:",
+    "contact-hours": "Horario:",
+    "contact-hours-detail": "Lun-Vie: 8:00-18:00\nSáb: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Todos los derechos reservados."
+  },
+  fr: {
+    "nav-home": "Accueil",
+    "nav-services": "Services",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Tarifs",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Services de detailing professionnels au plus haut niveau",
+    "hero-cta": "Contactez-nous",
+    "services-title": "Nos Services",
+    "service1-title": "Lavage Premium",
+    "service1-desc": "Lavage complet extérieur et intérieur avec des produits professionnels de haute qualité.",
+    "service2-title": "Polissage",
+    "service2-desc": "Élimination des rayures, restauration de l'éclat de la peinture et protection contre les agressions extérieures.",
+    "service3-title": "Protection de Peinture",
+    "service3-desc": "Application de cires, scellants et revêtements céramiques pour une protection durable.",
+    "service4-title": "Nettoyage Intérieur",
+    "service4-desc": "Nettoyage professionnel des tissus, cuirs, plastiques et éléments de finition.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauration complète du véhicule avec les meilleurs produits et techniques.",
+    "service6-title": "Entretien",
+    "service6-desc": "Entretien régulier pour garder le véhicule en parfait état.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Tarifs",
+    "package1-title": "Forfait Basique",
+    "package1-item1": "Lavage extérieur",
+    "package1-item2": "Aspiration intérieure",
+    "package1-item3": "Nettoyage des vitres",
+    "package1-item4": "Brillance des pneus",
+    "package2-title": "Forfait Premium",
+    "package2-item1": "Tout du Forfait Basique",
+    "package2-item2": "Nettoyage des tissus",
+    "package2-item3": "Polissage de la peinture",
+    "package2-item4": "Application de cire",
+    "package2-item5": "Nettoyage des jantes",
+    "package3-title": "Forfait VIP",
+    "package3-item1": "Tout du Forfait Premium",
+    "package3-item2": "Revêtement céramique",
+    "package3-item3": "Nettoyage du moteur",
+    "package3-item4": "Restauration des plastiques",
+    "package3-item5": "Garantie 6 mois",
+    "contact-title": "Contact",
+    "form-title": "Écrivez-nous",
+    "form-name": "Nom et Prénom",
+    "form-email": "Email",
+    "form-phone": "Téléphone",
+    "form-service": "Choisissez un service",
+    "form-service-basic": "Forfait Basique",
+    "form-service-premium": "Forfait Premium",
+    "form-service-vip": "Forfait VIP",
+    "form-service-custom": "Service personnalisé",
+    "form-message": "Message",
+    "form-submit": "Envoyer",
+    "contact-info-title": "Informations de contact",
+    "contact-phone": "Téléphone:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Horaires:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSam: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tous droits réservés."
+  },
+  it: {
+    "nav-home": "Home",
+    "nav-services": "Servizi",
+    "nav-gallery": "Galleria",
+    "nav-pricing": "Prezzi",
+    "nav-contact": "Contatto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servizi di detailing professionale al massimo livello",
+    "hero-cta": "Contattaci",
+    "services-title": "I Nostri Servizi",
+    "service1-title": "Lavaggio Premium",
+    "service1-desc": "Lavaggio completo esterno ed interno con prodotti professionali di alta qualità.",
+    "service2-title": "Lucidatura",
+    "service2-desc": "Rimozione graffi, ripristino della brillantezza della vernice e protezione dagli agenti esterni.",
+    "service3-title": "Protezione Vernice",
+    "service3-desc": "Applicazione di cere, sigillanti e rivestimenti ceramici per una protezione duratura.",
+    "service4-title": "Pulizia Interni",
+    "service4-desc": "Pulizia professionale di tappezzeria, pelle, plastica ed elementi di finitura.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauro completo del veicolo con i migliori prodotti e tecniche.",
+    "service6-title": "Manutenzione",
+    "service6-desc": "Cura e manutenzione regolare per mantenere il veicolo in condizioni perfette.",
+    "gallery-title": "Galleria",
+    "pricing-title": "Prezzi",
+    "package1-title": "Pacchetto Base",
+    "package1-item1": "Lavaggio esterno",
+    "package1-item2": "Aspirazione interna",
+    "package1-item3": "Pulizia vetri",
+    "package1-item4": "Cura pneumatici",
+    "package2-title": "Pacchetto Premium",
+    "package2-item1": "Tutto dal Pacchetto Base",
+    "package2-item2": "Pulizia tappezzeria",
+    "package2-item3": "Lucidatura vernice",
+    "package2-item4": "Applicazione cera",
+    "package2-item5": "Pulizia cerchi",
+    "package3-title": "Pacchetto VIP",
+    "package3-item1": "Tutto dal Pacchetto Premium",
+    "package3-item2": "Rivestimento ceramico",
+    "package3-item3": "Pulizia motore",
+    "package3-item4": "Restauro plastiche",
+    "package3-item5": "Garanzia 6 mesi",
+    "contact-title": "Contatto",
+    "form-title": "Scrivici",
+    "form-name": "Nome e Cognome",
+    "form-email": "Email",
+    "form-phone": "Telefono",
+    "form-service": "Scegli servizio",
+    "form-service-basic": "Pacchetto Base",
+    "form-service-premium": "Pacchetto Premium",
+    "form-service-vip": "Pacchetto VIP",
+    "form-service-custom": "Servizio personalizzato",
+    "form-message": "Messaggio",
+    "form-submit": "Invia",
+    "contact-info-title": "Informazioni di contatto",
+    "contact-phone": "Telefono:",
+    "contact-email": "Email:",
+    "contact-address": "Indirizzo:",
+    "contact-hours": "Orari:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSab: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tutti i diritti riservati."
+  }
+};
+
+function changeLanguage(lang) {
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-translate');
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', function(e) {
+    e.preventDefault();
+    const lang = this.getAttribute('data-lang');
+    changeLanguage(lang);
+    if (document.getElementById('langToggle')) {
+      document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+    }
+    if (document.getElementById('langMenu')) {
+      document.getElementById('langMenu').classList.remove('active');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+  changeLanguage(savedLang);
+});
+</script>
+
+</body>
+<script>
+
+
+function changeLanguage(lang) {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+    localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+        e.preventDefault();
+        const lang = this.getAttribute('data-lang');
+        changeLanguage(lang);
+        document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+        document.getElementById('langMenu').classList.remove('active');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+    changeLanguage(savedLang);
+});
+</script>
+
+
+<script>
+const translations = {
+  pl: {
+    "nav-home": "Strona główna",
+    "nav-services": "Usługi",
+    "nav-gallery": "Galeria",
+    "nav-pricing": "Cennik",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Profesjonalne usługi detailingowe na najwyższym poziomie",
+    "hero-cta": "Skontaktuj się z nami",
+    "services-title": "Nasze Usługi",
+    "service1-title": "Mycie Premium",
+    "service1-desc": "Kompleksowe mycie zewnętrzne i wewnętrzne z najwyższej jakości produktami profesjonalnymi.",
+    "service2-title": "Polerowanie",
+    "service2-desc": "Usuwanie zarysowań, przywracanie blasku lakieru i ochrona przed czynnikami zewnętrznymi.",
+    "service3-title": "Ochrona Lakieru",
+    "service3-desc": "Aplikacja wosków, sealerów i powłok ceramicznych dla długotrwałej ochrony.",
+    "service4-title": "Czyszczenie Wnętrz",
+    "service4-desc": "Profesjonalne czyszczenie tapicerki, skóry, plastików i elementów wykończenia.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Kompleksowa renowacja pojazdu z najwyższej klasy produktami i technikami.",
+    "service6-title": "Konserwacja",
+    "service6-desc": "Regularna pielęgnacja i konserwacja dla zachowania idealnego stanu pojazdu.",
+    "gallery-title": "Galeria Prac",
+    "pricing-title": "Cennik",
+    "package1-title": "Pakiet Basic",
+    "package1-item1": "Mycie zewnętrzne",
+    "package1-item2": "Odkurzanie wnętrza",
+    "package1-item3": "Czyszczenie szyb",
+    "package1-item4": "Nabłyszczanie opon",
+    "package2-title": "Pakiet Premium",
+    "package2-item1": "Wszystko z pakietu Basic",
+    "package2-item2": "Czyszczenie tapicerki",
+    "package2-item3": "Polerowanie lakieru",
+    "package2-item4": "Aplikacja wosku",
+    "package2-item5": "Czyszczenie felg",
+    "package3-title": "Pakiet VIP",
+    "package3-item1": "Wszystko z pakietu Premium",
+    "package3-item2": "Powłoka ceramiczna",
+    "package3-item3": "Czyszczenie silnika",
+    "package3-item4": "Renowacja plastików",
+    "package3-item5": "Gwarancja 6 miesięcy",
+    "contact-title": "Kontakt",
+    "form-title": "Napisz do nas",
+    "form-name": "Imię i Nazwisko",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Wybierz usługę",
+    "form-service-basic": "Pakiet Basic",
+    "form-service-premium": "Pakiet Premium",
+    "form-service-vip": "Pakiet VIP",
+    "form-service-custom": "Usługa indywidualna",
+    "form-message": "Wiadomość",
+    "form-submit": "Wyślij wiadomość",
+    "contact-info-title": "Informacje kontaktowe",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adres:",
+    "contact-hours": "Godziny pracy:",
+    "contact-hours-detail": "Pon-Pt: 8:00-18:00\nSob: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Wszystkie prawa zastrzeżone."
+  },
+  en: {
+    "nav-home": "Home",
+    "nav-services": "Services",
+    "nav-gallery": "Gallery",
+    "nav-pricing": "Pricing",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Professional detailing services at the highest level",
+    "hero-cta": "Contact us",
+    "services-title": "Our Services",
+    "service1-title": "Premium Wash",
+    "service1-desc": "Comprehensive exterior and interior wash with top-quality professional products.",
+    "service2-title": "Polishing",
+    "service2-desc": "Scratch removal, restoring paint shine and protecting against external factors.",
+    "service3-title": "Paint Protection",
+    "service3-desc": "Application of waxes, sealants, and ceramic coatings for long-lasting protection.",
+    "service4-title": "Interior Cleaning",
+    "service4-desc": "Professional cleaning of upholstery, leather, plastics, and trim elements.",
+    "service5-title": "Premium Detailing",
+    "service5-desc": "Comprehensive vehicle restoration with top-class products and techniques.",
+    "service6-title": "Maintenance",
+    "service6-desc": "Regular care and maintenance to keep the vehicle in perfect condition.",
+    "gallery-title": "Work Gallery",
+    "pricing-title": "Pricing",
+    "package1-title": "Basic Package",
+    "package1-item1": "Exterior wash",
+    "package1-item2": "Interior vacuuming",
+    "package1-item3": "Window cleaning",
+    "package1-item4": "Tire shining",
+    "package2-title": "Premium Package",
+    "package2-item1": "Everything from Basic",
+    "package2-item2": "Upholstery cleaning",
+    "package2-item3": "Paint polishing",
+    "package2-item4": "Wax application",
+    "package2-item5": "Wheel cleaning",
+    "package3-title": "VIP Package",
+    "package3-item1": "Everything from Premium",
+    "package3-item2": "Ceramic coating",
+    "package3-item3": "Engine cleaning",
+    "package3-item4": "Plastic restoration",
+    "package3-item5": "6-month warranty",
+    "contact-title": "Contact",
+    "form-title": "Write to us",
+    "form-name": "Full Name",
+    "form-email": "Email",
+    "form-phone": "Phone",
+    "form-service": "Choose service",
+    "form-service-basic": "Basic Package",
+    "form-service-premium": "Premium Package",
+    "form-service-vip": "VIP Package",
+    "form-service-custom": "Custom Service",
+    "form-message": "Message",
+    "form-submit": "Send Message",
+    "contact-info-title": "Contact Information",
+    "contact-phone": "Phone:",
+    "contact-email": "Email:",
+    "contact-address": "Address:",
+    "contact-hours": "Working hours:",
+    "contact-hours-detail": "Mon-Fri: 8:00-18:00\nSat: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. All rights reserved."
+  },
+  uk: {
+    "nav-home": "Головна",
+    "nav-services": "Послуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Ціни",
+    "nav-contact": "Контакт",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Професійні послуги детейлінгу на найвищому рівні",
+    "hero-cta": "Зв'яжіться з нами",
+    "services-title": "Наші Послуги",
+    "service1-title": "Преміум Мийка",
+    "service1-desc": "Комплексне зовнішнє та внутрішнє миття з використанням професійних засобів найвищої якості.",
+    "service2-title": "Полірування",
+    "service2-desc": "Видалення подряпин, відновлення блиску лакофарбового покриття та захист від зовнішніх факторів.",
+    "service3-title": "Захист Лаку",
+    "service3-desc": "Нанесення восків, герметиків і керамічних покриттів для тривалого захисту.",
+    "service4-title": "Чистка Салону",
+    "service4-desc": "Професійне очищення оббивки, шкіри, пластику та елементів оздоблення.",
+    "service5-title": "Преміум Детейлінг",
+    "service5-desc": "Комплексне відновлення автомобіля з використанням найкращих продуктів і технік.",
+    "service6-title": "Обслуговування",
+    "service6-desc": "Регулярний догляд і технічне обслуговування для підтримання ідеального стану автомобіля.",
+    "gallery-title": "Галерея Робіт",
+    "pricing-title": "Ціни",
+    "package1-title": "Базовий Пакет",
+    "package1-item1": "Зовнішнє миття",
+    "package1-item2": "Прибирання салону",
+    "package1-item3": "Очищення вікон",
+    "package1-item4": "Блиск шин",
+    "package2-title": "Пакет Преміум",
+    "package2-item1": "Все з Базового пакету",
+    "package2-item2": "Чистка оббивки",
+    "package2-item3": "Полірування лаку",
+    "package2-item4": "Нанесення воску",
+    "package2-item5": "Чистка дисків",
+    "package3-title": "Пакет VIP",
+    "package3-item1": "Все з Преміум пакету",
+    "package3-item2": "Керамічне покриття",
+    "package3-item3": "Чистка двигуна",
+    "package3-item4": "Відновлення пластику",
+    "package3-item5": "Гарантія 6 місяців",
+    "contact-title": "Контакт",
+    "form-title": "Напишіть нам",
+    "form-name": "Ім'я та прізвище",
+    "form-email": "Електронна пошта",
+    "form-phone": "Телефон",
+    "form-service": "Виберіть послугу",
+    "form-service-basic": "Базовий пакет",
+    "form-service-premium": "Пакет Преміум",
+    "form-service-vip": "Пакет VIP",
+    "form-service-custom": "Індивідуальна послуга",
+    "form-message": "Повідомлення",
+    "form-submit": "Надіслати повідомлення",
+    "contact-info-title": "Контактна інформація",
+    "contact-phone": "Телефон:",
+    "contact-email": "Електронна пошта:",
+    "contact-address": "Адреса:",
+    "contact-hours": "Години роботи:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Всі права захищені."
+  },
+  ru: {
+    "nav-home": "Главная",
+    "nav-services": "Услуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Цены",
+    "nav-contact": "Контакты",
+    "hero-title": "Bushido Детейлинг",
+    "hero-subtitle": "Профессиональные услуги детейлинга на высшем уровне",
+    "hero-cta": "Свяжитесь с нами",
+    "services-title": "Наши Услуги",
+    "service1-title": "Премиум Мойка",
+    "service1-desc": "Комплексная мойка снаружи и внутри с использованием лучших профессиональных средств.",
+    "service2-title": "Полировка",
+    "service2-desc": "Удаление царапин, восстановление блеска и защита от внешних факторов.",
+    "service3-title": "Защита ЛКП",
+    "service3-desc": "Нанесение восков, герметиков и керамических покрытий для длительной защиты.",
+    "service4-title": "Чистка Салона",
+    "service4-desc": "Профессиональная чистка обивки, кожи, пластика и декоративных элементов.",
+    "service5-title": "Премиум Детейлинг",
+    "service5-desc": "Комплексная реставрация автомобиля с лучшими продуктами и техниками.",
+    "service6-title": "Обслуживание",
+    "service6-desc": "Регулярный уход и обслуживание для поддержания идеального состояния автомобиля.",
+    "gallery-title": "Галерея Работ",
+    "pricing-title": "Цены",
+    "package1-title": "Базовый Пакет",
+    "package1-item1": "Наружная мойка",
+    "package1-item2": "Уборка салона",
+    "package1-item3": "Чистка стекол",
+    "package1-item4": "Уход за шинами",
+    "package2-title": "Премиум Пакет",
+    "package2-item1": "Все из Базового пакета",
+    "package2-item2": "Чистка обивки",
+    "package2-item3": "Полировка ЛКП",
+    "package2-item4": "Нанесение воска",
+    "package2-item5": "Чистка дисков",
+    "package3-title": "VIP Пакет",
+    "package3-item1": "Все из Премиум пакета",
+    "package3-item2": "Керамическое покрытие",
+    "package3-item3": "Чистка двигателя",
+    "package3-item4": "Реставрация пластика",
+    "package3-item5": "Гарантия 6 месяцев",
+    "contact-title": "Контакты",
+    "form-title": "Напишите нам",
+    "form-name": "Имя и Фамилия",
+    "form-email": "Email",
+    "form-phone": "Телефон",
+    "form-service": "Выберите услугу",
+    "form-service-basic": "Базовый пакет",
+    "form-service-premium": "Премиум пакет",
+    "form-service-vip": "VIP пакет",
+    "form-service-custom": "Индивидуальная услуга",
+    "form-message": "Сообщение",
+    "form-submit": "Отправить",
+    "contact-info-title": "Контактная информация",
+    "contact-phone": "Телефон:",
+    "contact-email": "Email:",
+    "contact-address": "Адрес:",
+    "contact-hours": "Часы работы:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Все права защищены."
+  },
+  de: {
+    "nav-home": "Startseite",
+    "nav-services": "Dienstleistungen",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Preise",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Autopflege",
+    "hero-subtitle": "Professionelle Detailing-Dienstleistungen auf höchstem Niveau",
+    "hero-cta": "Kontaktieren Sie uns",
+    "services-title": "Unsere Dienstleistungen",
+    "service1-title": "Premiumwäsche",
+    "service1-desc": "Umfassende Außen- und Innenwäsche mit hochwertigen Profi-Produkten.",
+    "service2-title": "Polieren",
+    "service2-desc": "Entfernung von Kratzern, Wiederherstellung des Lackglanzes und Schutz vor äußeren Einflüssen.",
+    "service3-title": "Lackschutz",
+    "service3-desc": "Auftragen von Wachsen, Versiegelungen und Keramikbeschichtungen für langanhaltenden Schutz.",
+    "service4-title": "Innenreinigung",
+    "service4-desc": "Professionelle Reinigung von Polstern, Leder, Kunststoffen und Verkleidungselementen.",
+    "service5-title": "Premium-Detailing",
+    "service5-desc": "Umfassende Fahrzeugaufbereitung mit den besten Produkten und Techniken.",
+    "service6-title": "Wartung",
+    "service6-desc": "Regelmäßige Pflege und Wartung zur Erhaltung des perfekten Zustands.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Preise",
+    "package1-title": "Basic-Paket",
+    "package1-item1": "Außenwäsche",
+    "package1-item2": "Innenreinigung",
+    "package1-item3": "Fensterreinigung",
+    "package1-item4": "Reifenpflege",
+    "package2-title": "Premium-Paket",
+    "package2-item1": "Alles aus dem Basic-Paket",
+    "package2-item2": "Polsterreinigung",
+    "package2-item3": "Lackpolitur",
+    "package2-item4": "Wachsauftrag",
+    "package2-item5": "Felgenreinigung",
+    "package3-title": "VIP-Paket",
+    "package3-item1": "Alles aus dem Premium-Paket",
+    "package3-item2": "Keramikbeschichtung",
+    "package3-item3": "Motorreinigung",
+    "package3-item4": "Kunststoffrestaurierung",
+    "package3-item5": "6 Monate Garantie",
+    "contact-title": "Kontakt",
+    "form-title": "Schreiben Sie uns",
+    "form-name": "Vor- und Nachname",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Dienstleistung auswählen",
+    "form-service-basic": "Basic-Paket",
+    "form-service-premium": "Premium-Paket",
+    "form-service-vip": "VIP-Paket",
+    "form-service-custom": "Individueller Service",
+    "form-message": "Nachricht",
+    "form-submit": "Nachricht senden",
+    "contact-info-title": "Kontaktinformationen",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Öffnungszeiten:",
+    "contact-hours-detail": "Mo-Fr: 8:00-18:00\nSa: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Alle Rechte vorbehalten."
+  },
+  es: {
+    "nav-home": "Inicio",
+    "nav-services": "Servicios",
+    "nav-gallery": "Galería",
+    "nav-pricing": "Precios",
+    "nav-contact": "Contacto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servicios profesionales de detailing al más alto nivel",
+    "hero-cta": "Contáctanos",
+    "services-title": "Nuestros Servicios",
+    "service1-title": "Lavado Premium",
+    "service1-desc": "Lavado completo exterior e interior con productos profesionales de alta calidad.",
+    "service2-title": "Pulido",
+    "service2-desc": "Eliminación de arañazos, restauración del brillo de la pintura y protección contra factores externos.",
+    "service3-title": "Protección de Pintura",
+    "service3-desc": "Aplicación de ceras, selladores y recubrimientos cerámicos para una protección duradera.",
+    "service4-title": "Limpieza Interior",
+    "service4-desc": "Limpieza profesional de tapicería, cuero, plásticos y elementos de acabado.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauración integral del vehículo con los mejores productos y técnicas.",
+    "service6-title": "Mantenimiento",
+    "service6-desc": "Cuidado y mantenimiento regular para mantener el vehículo en perfecto estado.",
+    "gallery-title": "Galería de Trabajos",
+    "pricing-title": "Precios",
+    "package1-title": "Paquete Básico",
+    "package1-item1": "Lavado exterior",
+    "package1-item2": "Aspirado interior",
+    "package1-item3": "Limpieza de cristales",
+    "package1-item4": "Brillo de neumáticos",
+    "package2-title": "Paquete Premium",
+    "package2-item1": "Todo del Paquete Básico",
+    "package2-item2": "Limpieza de tapicería",
+    "package2-item3": "Pulido de pintura",
+    "package2-item4": "Aplicación de cera",
+    "package2-item5": "Limpieza de llantas",
+    "package3-title": "Paquete VIP",
+    "package3-item1": "Todo del Paquete Premium",
+    "package3-item2": "Recubrimiento cerámico",
+    "package3-item3": "Limpieza del motor",
+    "package3-item4": "Restauración de plásticos",
+    "package3-item5": "Garantía de 6 meses",
+    "contact-title": "Contacto",
+    "form-title": "Escríbenos",
+    "form-name": "Nombre y Apellido",
+    "form-email": "Email",
+    "form-phone": "Teléfono",
+    "form-service": "Selecciona un servicio",
+    "form-service-basic": "Paquete Básico",
+    "form-service-premium": "Paquete Premium",
+    "form-service-vip": "Paquete VIP",
+    "form-service-custom": "Servicio personalizado",
+    "form-message": "Mensaje",
+    "form-submit": "Enviar mensaje",
+    "contact-info-title": "Información de contacto",
+    "contact-phone": "Teléfono:",
+    "contact-email": "Email:",
+    "contact-address": "Dirección:",
+    "contact-hours": "Horario:",
+    "contact-hours-detail": "Lun-Vie: 8:00-18:00\nSáb: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Todos los derechos reservados."
+  },
+  fr: {
+    "nav-home": "Accueil",
+    "nav-services": "Services",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Tarifs",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Services de detailing professionnels au plus haut niveau",
+    "hero-cta": "Contactez-nous",
+    "services-title": "Nos Services",
+    "service1-title": "Lavage Premium",
+    "service1-desc": "Lavage complet extérieur et intérieur avec des produits professionnels de haute qualité.",
+    "service2-title": "Polissage",
+    "service2-desc": "Élimination des rayures, restauration de l'éclat de la peinture et protection contre les agressions extérieures.",
+    "service3-title": "Protection de Peinture",
+    "service3-desc": "Application de cires, scellants et revêtements céramiques pour une protection durable.",
+    "service4-title": "Nettoyage Intérieur",
+    "service4-desc": "Nettoyage professionnel des tissus, cuirs, plastiques et éléments de finition.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauration complète du véhicule avec les meilleurs produits et techniques.",
+    "service6-title": "Entretien",
+    "service6-desc": "Entretien régulier pour garder le véhicule en parfait état.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Tarifs",
+    "package1-title": "Forfait Basique",
+    "package1-item1": "Lavage extérieur",
+    "package1-item2": "Aspiration intérieure",
+    "package1-item3": "Nettoyage des vitres",
+    "package1-item4": "Brillance des pneus",
+    "package2-title": "Forfait Premium",
+    "package2-item1": "Tout du Forfait Basique",
+    "package2-item2": "Nettoyage des tissus",
+    "package2-item3": "Polissage de la peinture",
+    "package2-item4": "Application de cire",
+    "package2-item5": "Nettoyage des jantes",
+    "package3-title": "Forfait VIP",
+    "package3-item1": "Tout du Forfait Premium",
+    "package3-item2": "Revêtement céramique",
+    "package3-item3": "Nettoyage du moteur",
+    "package3-item4": "Restauration des plastiques",
+    "package3-item5": "Garantie 6 mois",
+    "contact-title": "Contact",
+    "form-title": "Écrivez-nous",
+    "form-name": "Nom et Prénom",
+    "form-email": "Email",
+    "form-phone": "Téléphone",
+    "form-service": "Choisissez un service",
+    "form-service-basic": "Forfait Basique",
+    "form-service-premium": "Forfait Premium",
+    "form-service-vip": "Forfait VIP",
+    "form-service-custom": "Service personnalisé",
+    "form-message": "Message",
+    "form-submit": "Envoyer",
+    "contact-info-title": "Informations de contact",
+    "contact-phone": "Téléphone:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Horaires:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSam: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tous droits réservés."
+  },
+  it: {
+    "nav-home": "Home",
+    "nav-services": "Servizi",
+    "nav-gallery": "Galleria",
+    "nav-pricing": "Prezzi",
+    "nav-contact": "Contatto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servizi di detailing professionale al massimo livello",
+    "hero-cta": "Contattaci",
+    "services-title": "I Nostri Servizi",
+    "service1-title": "Lavaggio Premium",
+    "service1-desc": "Lavaggio completo esterno ed interno con prodotti professionali di alta qualità.",
+    "service2-title": "Lucidatura",
+    "service2-desc": "Rimozione graffi, ripristino della brillantezza della vernice e protezione dagli agenti esterni.",
+    "service3-title": "Protezione Vernice",
+    "service3-desc": "Applicazione di cere, sigillanti e rivestimenti ceramici per una protezione duratura.",
+    "service4-title": "Pulizia Interni",
+    "service4-desc": "Pulizia professionale di tappezzeria, pelle, plastica ed elementi di finitura.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauro completo del veicolo con i migliori prodotti e tecniche.",
+    "service6-title": "Manutenzione",
+    "service6-desc": "Cura e manutenzione regolare per mantenere il veicolo in condizioni perfette.",
+    "gallery-title": "Galleria",
+    "pricing-title": "Prezzi",
+    "package1-title": "Pacchetto Base",
+    "package1-item1": "Lavaggio esterno",
+    "package1-item2": "Aspirazione interna",
+    "package1-item3": "Pulizia vetri",
+    "package1-item4": "Cura pneumatici",
+    "package2-title": "Pacchetto Premium",
+    "package2-item1": "Tutto dal Pacchetto Base",
+    "package2-item2": "Pulizia tappezzeria",
+    "package2-item3": "Lucidatura vernice",
+    "package2-item4": "Applicazione cera",
+    "package2-item5": "Pulizia cerchi",
+    "package3-title": "Pacchetto VIP",
+    "package3-item1": "Tutto dal Pacchetto Premium",
+    "package3-item2": "Rivestimento ceramico",
+    "package3-item3": "Pulizia motore",
+    "package3-item4": "Restauro plastiche",
+    "package3-item5": "Garanzia 6 mesi",
+    "contact-title": "Contatto",
+    "form-title": "Scrivici",
+    "form-name": "Nome e Cognome",
+    "form-email": "Email",
+    "form-phone": "Telefono",
+    "form-service": "Scegli servizio",
+    "form-service-basic": "Pacchetto Base",
+    "form-service-premium": "Pacchetto Premium",
+    "form-service-vip": "Pacchetto VIP",
+    "form-service-custom": "Servizio personalizzato",
+    "form-message": "Messaggio",
+    "form-submit": "Invia",
+    "contact-info-title": "Informazioni di contatto",
+    "contact-phone": "Telefono:",
+    "contact-email": "Email:",
+    "contact-address": "Indirizzo:",
+    "contact-hours": "Orari:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSab: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tutti i diritti riservati."
+  }
+};
+
+function changeLanguage(lang) {
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-translate');
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', function(e) {
+    e.preventDefault();
+    const lang = this.getAttribute('data-lang');
+    changeLanguage(lang);
+    if (document.getElementById('langToggle')) {
+      document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+    }
+    if (document.getElementById('langMenu')) {
+      document.getElementById('langMenu').classList.remove('active');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+  changeLanguage(savedLang);
+});
+</script>
+
+</body>
+<script>
+
+
+function changeLanguage(lang) {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+    localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+        e.preventDefault();
+        const lang = this.getAttribute('data-lang');
+        changeLanguage(lang);
+        document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+        document.getElementById('langMenu').classList.remove('active');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+    changeLanguage(savedLang);
+});
+</script>
+
+
+<script>
+const translations = {
+  pl: {
+    "nav-home": "Strona główna",
+    "nav-services": "Usługi",
+    "nav-gallery": "Galeria",
+    "nav-pricing": "Cennik",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Profesjonalne usługi detailingowe na najwyższym poziomie",
+    "hero-cta": "Skontaktuj się z nami",
+    "services-title": "Nasze Usługi",
+    "service1-title": "Mycie Premium",
+    "service1-desc": "Kompleksowe mycie zewnętrzne i wewnętrzne z najwyższej jakości produktami profesjonalnymi.",
+    "service2-title": "Polerowanie",
+    "service2-desc": "Usuwanie zarysowań, przywracanie blasku lakieru i ochrona przed czynnikami zewnętrznymi.",
+    "service3-title": "Ochrona Lakieru",
+    "service3-desc": "Aplikacja wosków, sealerów i powłok ceramicznych dla długotrwałej ochrony.",
+    "service4-title": "Czyszczenie Wnętrz",
+    "service4-desc": "Profesjonalne czyszczenie tapicerki, skóry, plastików i elementów wykończenia.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Kompleksowa renowacja pojazdu z najwyższej klasy produktami i technikami.",
+    "service6-title": "Konserwacja",
+    "service6-desc": "Regularna pielęgnacja i konserwacja dla zachowania idealnego stanu pojazdu.",
+    "gallery-title": "Galeria Prac",
+    "pricing-title": "Cennik",
+    "package1-title": "Pakiet Basic",
+    "package1-item1": "Mycie zewnętrzne",
+    "package1-item2": "Odkurzanie wnętrza",
+    "package1-item3": "Czyszczenie szyb",
+    "package1-item4": "Nabłyszczanie opon",
+    "package2-title": "Pakiet Premium",
+    "package2-item1": "Wszystko z pakietu Basic",
+    "package2-item2": "Czyszczenie tapicerki",
+    "package2-item3": "Polerowanie lakieru",
+    "package2-item4": "Aplikacja wosku",
+    "package2-item5": "Czyszczenie felg",
+    "package3-title": "Pakiet VIP",
+    "package3-item1": "Wszystko z pakietu Premium",
+    "package3-item2": "Powłoka ceramiczna",
+    "package3-item3": "Czyszczenie silnika",
+    "package3-item4": "Renowacja plastików",
+    "package3-item5": "Gwarancja 6 miesięcy",
+    "contact-title": "Kontakt",
+    "form-title": "Napisz do nas",
+    "form-name": "Imię i Nazwisko",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Wybierz usługę",
+    "form-service-basic": "Pakiet Basic",
+    "form-service-premium": "Pakiet Premium",
+    "form-service-vip": "Pakiet VIP",
+    "form-service-custom": "Usługa indywidualna",
+    "form-message": "Wiadomość",
+    "form-submit": "Wyślij wiadomość",
+    "contact-info-title": "Informacje kontaktowe",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adres:",
+    "contact-hours": "Godziny pracy:",
+    "contact-hours-detail": "Pon-Pt: 8:00-18:00\nSob: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Wszystkie prawa zastrzeżone."
+  },
+  en: {
+    "nav-home": "Home",
+    "nav-services": "Services",
+    "nav-gallery": "Gallery",
+    "nav-pricing": "Pricing",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Professional detailing services at the highest level",
+    "hero-cta": "Contact us",
+    "services-title": "Our Services",
+    "service1-title": "Premium Wash",
+    "service1-desc": "Comprehensive exterior and interior wash with top-quality professional products.",
+    "service2-title": "Polishing",
+    "service2-desc": "Scratch removal, restoring paint shine and protecting against external factors.",
+    "service3-title": "Paint Protection",
+    "service3-desc": "Application of waxes, sealants, and ceramic coatings for long-lasting protection.",
+    "service4-title": "Interior Cleaning",
+    "service4-desc": "Professional cleaning of upholstery, leather, plastics, and trim elements.",
+    "service5-title": "Premium Detailing",
+    "service5-desc": "Comprehensive vehicle restoration with top-class products and techniques.",
+    "service6-title": "Maintenance",
+    "service6-desc": "Regular care and maintenance to keep the vehicle in perfect condition.",
+    "gallery-title": "Work Gallery",
+    "pricing-title": "Pricing",
+    "package1-title": "Basic Package",
+    "package1-item1": "Exterior wash",
+    "package1-item2": "Interior vacuuming",
+    "package1-item3": "Window cleaning",
+    "package1-item4": "Tire shining",
+    "package2-title": "Premium Package",
+    "package2-item1": "Everything from Basic",
+    "package2-item2": "Upholstery cleaning",
+    "package2-item3": "Paint polishing",
+    "package2-item4": "Wax application",
+    "package2-item5": "Wheel cleaning",
+    "package3-title": "VIP Package",
+    "package3-item1": "Everything from Premium",
+    "package3-item2": "Ceramic coating",
+    "package3-item3": "Engine cleaning",
+    "package3-item4": "Plastic restoration",
+    "package3-item5": "6-month warranty",
+    "contact-title": "Contact",
+    "form-title": "Write to us",
+    "form-name": "Full Name",
+    "form-email": "Email",
+    "form-phone": "Phone",
+    "form-service": "Choose service",
+    "form-service-basic": "Basic Package",
+    "form-service-premium": "Premium Package",
+    "form-service-vip": "VIP Package",
+    "form-service-custom": "Custom Service",
+    "form-message": "Message",
+    "form-submit": "Send Message",
+    "contact-info-title": "Contact Information",
+    "contact-phone": "Phone:",
+    "contact-email": "Email:",
+    "contact-address": "Address:",
+    "contact-hours": "Working hours:",
+    "contact-hours-detail": "Mon-Fri: 8:00-18:00\nSat: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. All rights reserved."
+  },
+  uk: {
+    "nav-home": "Головна",
+    "nav-services": "Послуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Ціни",
+    "nav-contact": "Контакт",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Професійні послуги детейлінгу на найвищому рівні",
+    "hero-cta": "Зв'яжіться з нами",
+    "services-title": "Наші Послуги",
+    "service1-title": "Преміум Мийка",
+    "service1-desc": "Комплексне зовнішнє та внутрішнє миття з використанням професійних засобів найвищої якості.",
+    "service2-title": "Полірування",
+    "service2-desc": "Видалення подряпин, відновлення блиску лакофарбового покриття та захист від зовнішніх факторів.",
+    "service3-title": "Захист Лаку",
+    "service3-desc": "Нанесення восків, герметиків і керамічних покриттів для тривалого захисту.",
+    "service4-title": "Чистка Салону",
+    "service4-desc": "Професійне очищення оббивки, шкіри, пластику та елементів оздоблення.",
+    "service5-title": "Преміум Детейлінг",
+    "service5-desc": "Комплексне відновлення автомобіля з використанням найкращих продуктів і технік.",
+    "service6-title": "Обслуговування",
+    "service6-desc": "Регулярний догляд і технічне обслуговування для підтримання ідеального стану автомобіля.",
+    "gallery-title": "Галерея Робіт",
+    "pricing-title": "Ціни",
+    "package1-title": "Базовий Пакет",
+    "package1-item1": "Зовнішнє миття",
+    "package1-item2": "Прибирання салону",
+    "package1-item3": "Очищення вікон",
+    "package1-item4": "Блиск шин",
+    "package2-title": "Пакет Преміум",
+    "package2-item1": "Все з Базового пакету",
+    "package2-item2": "Чистка оббивки",
+    "package2-item3": "Полірування лаку",
+    "package2-item4": "Нанесення воску",
+    "package2-item5": "Чистка дисків",
+    "package3-title": "Пакет VIP",
+    "package3-item1": "Все з Преміум пакету",
+    "package3-item2": "Керамічне покриття",
+    "package3-item3": "Чистка двигуна",
+    "package3-item4": "Відновлення пластику",
+    "package3-item5": "Гарантія 6 місяців",
+    "contact-title": "Контакт",
+    "form-title": "Напишіть нам",
+    "form-name": "Ім'я та прізвище",
+    "form-email": "Електронна пошта",
+    "form-phone": "Телефон",
+    "form-service": "Виберіть послугу",
+    "form-service-basic": "Базовий пакет",
+    "form-service-premium": "Пакет Преміум",
+    "form-service-vip": "Пакет VIP",
+    "form-service-custom": "Індивідуальна послуга",
+    "form-message": "Повідомлення",
+    "form-submit": "Надіслати повідомлення",
+    "contact-info-title": "Контактна інформація",
+    "contact-phone": "Телефон:",
+    "contact-email": "Електронна пошта:",
+    "contact-address": "Адреса:",
+    "contact-hours": "Години роботи:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Всі права захищені."
+  },
+  ru: {
+    "nav-home": "Главная",
+    "nav-services": "Услуги",
+    "nav-gallery": "Галерея",
+    "nav-pricing": "Цены",
+    "nav-contact": "Контакты",
+    "hero-title": "Bushido Детейлинг",
+    "hero-subtitle": "Профессиональные услуги детейлинга на высшем уровне",
+    "hero-cta": "Свяжитесь с нами",
+    "services-title": "Наши Услуги",
+    "service1-title": "Премиум Мойка",
+    "service1-desc": "Комплексная мойка снаружи и внутри с использованием лучших профессиональных средств.",
+    "service2-title": "Полировка",
+    "service2-desc": "Удаление царапин, восстановление блеска и защита от внешних факторов.",
+    "service3-title": "Защита ЛКП",
+    "service3-desc": "Нанесение восков, герметиков и керамических покрытий для длительной защиты.",
+    "service4-title": "Чистка Салона",
+    "service4-desc": "Профессиональная чистка обивки, кожи, пластика и декоративных элементов.",
+    "service5-title": "Премиум Детейлинг",
+    "service5-desc": "Комплексная реставрация автомобиля с лучшими продуктами и техниками.",
+    "service6-title": "Обслуживание",
+    "service6-desc": "Регулярный уход и обслуживание для поддержания идеального состояния автомобиля.",
+    "gallery-title": "Галерея Работ",
+    "pricing-title": "Цены",
+    "package1-title": "Базовый Пакет",
+    "package1-item1": "Наружная мойка",
+    "package1-item2": "Уборка салона",
+    "package1-item3": "Чистка стекол",
+    "package1-item4": "Уход за шинами",
+    "package2-title": "Премиум Пакет",
+    "package2-item1": "Все из Базового пакета",
+    "package2-item2": "Чистка обивки",
+    "package2-item3": "Полировка ЛКП",
+    "package2-item4": "Нанесение воска",
+    "package2-item5": "Чистка дисков",
+    "package3-title": "VIP Пакет",
+    "package3-item1": "Все из Премиум пакета",
+    "package3-item2": "Керамическое покрытие",
+    "package3-item3": "Чистка двигателя",
+    "package3-item4": "Реставрация пластика",
+    "package3-item5": "Гарантия 6 месяцев",
+    "contact-title": "Контакты",
+    "form-title": "Напишите нам",
+    "form-name": "Имя и Фамилия",
+    "form-email": "Email",
+    "form-phone": "Телефон",
+    "form-service": "Выберите услугу",
+    "form-service-basic": "Базовый пакет",
+    "form-service-premium": "Премиум пакет",
+    "form-service-vip": "VIP пакет",
+    "form-service-custom": "Индивидуальная услуга",
+    "form-message": "Сообщение",
+    "form-submit": "Отправить",
+    "contact-info-title": "Контактная информация",
+    "contact-phone": "Телефон:",
+    "contact-email": "Email:",
+    "contact-address": "Адрес:",
+    "contact-hours": "Часы работы:",
+    "contact-hours-detail": "Пн-Пт: 8:00-18:00\nСб: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Все права защищены."
+  },
+  de: {
+    "nav-home": "Startseite",
+    "nav-services": "Dienstleistungen",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Preise",
+    "nav-contact": "Kontakt",
+    "hero-title": "Bushido Autopflege",
+    "hero-subtitle": "Professionelle Detailing-Dienstleistungen auf höchstem Niveau",
+    "hero-cta": "Kontaktieren Sie uns",
+    "services-title": "Unsere Dienstleistungen",
+    "service1-title": "Premiumwäsche",
+    "service1-desc": "Umfassende Außen- und Innenwäsche mit hochwertigen Profi-Produkten.",
+    "service2-title": "Polieren",
+    "service2-desc": "Entfernung von Kratzern, Wiederherstellung des Lackglanzes und Schutz vor äußeren Einflüssen.",
+    "service3-title": "Lackschutz",
+    "service3-desc": "Auftragen von Wachsen, Versiegelungen und Keramikbeschichtungen für langanhaltenden Schutz.",
+    "service4-title": "Innenreinigung",
+    "service4-desc": "Professionelle Reinigung von Polstern, Leder, Kunststoffen und Verkleidungselementen.",
+    "service5-title": "Premium-Detailing",
+    "service5-desc": "Umfassende Fahrzeugaufbereitung mit den besten Produkten und Techniken.",
+    "service6-title": "Wartung",
+    "service6-desc": "Regelmäßige Pflege und Wartung zur Erhaltung des perfekten Zustands.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Preise",
+    "package1-title": "Basic-Paket",
+    "package1-item1": "Außenwäsche",
+    "package1-item2": "Innenreinigung",
+    "package1-item3": "Fensterreinigung",
+    "package1-item4": "Reifenpflege",
+    "package2-title": "Premium-Paket",
+    "package2-item1": "Alles aus dem Basic-Paket",
+    "package2-item2": "Polsterreinigung",
+    "package2-item3": "Lackpolitur",
+    "package2-item4": "Wachsauftrag",
+    "package2-item5": "Felgenreinigung",
+    "package3-title": "VIP-Paket",
+    "package3-item1": "Alles aus dem Premium-Paket",
+    "package3-item2": "Keramikbeschichtung",
+    "package3-item3": "Motorreinigung",
+    "package3-item4": "Kunststoffrestaurierung",
+    "package3-item5": "6 Monate Garantie",
+    "contact-title": "Kontakt",
+    "form-title": "Schreiben Sie uns",
+    "form-name": "Vor- und Nachname",
+    "form-email": "Email",
+    "form-phone": "Telefon",
+    "form-service": "Dienstleistung auswählen",
+    "form-service-basic": "Basic-Paket",
+    "form-service-premium": "Premium-Paket",
+    "form-service-vip": "VIP-Paket",
+    "form-service-custom": "Individueller Service",
+    "form-message": "Nachricht",
+    "form-submit": "Nachricht senden",
+    "contact-info-title": "Kontaktinformationen",
+    "contact-phone": "Telefon:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Öffnungszeiten:",
+    "contact-hours-detail": "Mo-Fr: 8:00-18:00\nSa: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Alle Rechte vorbehalten."
+  },
+  es: {
+    "nav-home": "Inicio",
+    "nav-services": "Servicios",
+    "nav-gallery": "Galería",
+    "nav-pricing": "Precios",
+    "nav-contact": "Contacto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servicios profesionales de detailing al más alto nivel",
+    "hero-cta": "Contáctanos",
+    "services-title": "Nuestros Servicios",
+    "service1-title": "Lavado Premium",
+    "service1-desc": "Lavado completo exterior e interior con productos profesionales de alta calidad.",
+    "service2-title": "Pulido",
+    "service2-desc": "Eliminación de arañazos, restauración del brillo de la pintura y protección contra factores externos.",
+    "service3-title": "Protección de Pintura",
+    "service3-desc": "Aplicación de ceras, selladores y recubrimientos cerámicos para una protección duradera.",
+    "service4-title": "Limpieza Interior",
+    "service4-desc": "Limpieza profesional de tapicería, cuero, plásticos y elementos de acabado.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauración integral del vehículo con los mejores productos y técnicas.",
+    "service6-title": "Mantenimiento",
+    "service6-desc": "Cuidado y mantenimiento regular para mantener el vehículo en perfecto estado.",
+    "gallery-title": "Galería de Trabajos",
+    "pricing-title": "Precios",
+    "package1-title": "Paquete Básico",
+    "package1-item1": "Lavado exterior",
+    "package1-item2": "Aspirado interior",
+    "package1-item3": "Limpieza de cristales",
+    "package1-item4": "Brillo de neumáticos",
+    "package2-title": "Paquete Premium",
+    "package2-item1": "Todo del Paquete Básico",
+    "package2-item2": "Limpieza de tapicería",
+    "package2-item3": "Pulido de pintura",
+    "package2-item4": "Aplicación de cera",
+    "package2-item5": "Limpieza de llantas",
+    "package3-title": "Paquete VIP",
+    "package3-item1": "Todo del Paquete Premium",
+    "package3-item2": "Recubrimiento cerámico",
+    "package3-item3": "Limpieza del motor",
+    "package3-item4": "Restauración de plásticos",
+    "package3-item5": "Garantía de 6 meses",
+    "contact-title": "Contacto",
+    "form-title": "Escríbenos",
+    "form-name": "Nombre y Apellido",
+    "form-email": "Email",
+    "form-phone": "Teléfono",
+    "form-service": "Selecciona un servicio",
+    "form-service-basic": "Paquete Básico",
+    "form-service-premium": "Paquete Premium",
+    "form-service-vip": "Paquete VIP",
+    "form-service-custom": "Servicio personalizado",
+    "form-message": "Mensaje",
+    "form-submit": "Enviar mensaje",
+    "contact-info-title": "Información de contacto",
+    "contact-phone": "Teléfono:",
+    "contact-email": "Email:",
+    "contact-address": "Dirección:",
+    "contact-hours": "Horario:",
+    "contact-hours-detail": "Lun-Vie: 8:00-18:00\nSáb: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Todos los derechos reservados."
+  },
+  fr: {
+    "nav-home": "Accueil",
+    "nav-services": "Services",
+    "nav-gallery": "Galerie",
+    "nav-pricing": "Tarifs",
+    "nav-contact": "Contact",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Services de detailing professionnels au plus haut niveau",
+    "hero-cta": "Contactez-nous",
+    "services-title": "Nos Services",
+    "service1-title": "Lavage Premium",
+    "service1-desc": "Lavage complet extérieur et intérieur avec des produits professionnels de haute qualité.",
+    "service2-title": "Polissage",
+    "service2-desc": "Élimination des rayures, restauration de l'éclat de la peinture et protection contre les agressions extérieures.",
+    "service3-title": "Protection de Peinture",
+    "service3-desc": "Application de cires, scellants et revêtements céramiques pour une protection durable.",
+    "service4-title": "Nettoyage Intérieur",
+    "service4-desc": "Nettoyage professionnel des tissus, cuirs, plastiques et éléments de finition.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauration complète du véhicule avec les meilleurs produits et techniques.",
+    "service6-title": "Entretien",
+    "service6-desc": "Entretien régulier pour garder le véhicule en parfait état.",
+    "gallery-title": "Galerie",
+    "pricing-title": "Tarifs",
+    "package1-title": "Forfait Basique",
+    "package1-item1": "Lavage extérieur",
+    "package1-item2": "Aspiration intérieure",
+    "package1-item3": "Nettoyage des vitres",
+    "package1-item4": "Brillance des pneus",
+    "package2-title": "Forfait Premium",
+    "package2-item1": "Tout du Forfait Basique",
+    "package2-item2": "Nettoyage des tissus",
+    "package2-item3": "Polissage de la peinture",
+    "package2-item4": "Application de cire",
+    "package2-item5": "Nettoyage des jantes",
+    "package3-title": "Forfait VIP",
+    "package3-item1": "Tout du Forfait Premium",
+    "package3-item2": "Revêtement céramique",
+    "package3-item3": "Nettoyage du moteur",
+    "package3-item4": "Restauration des plastiques",
+    "package3-item5": "Garantie 6 mois",
+    "contact-title": "Contact",
+    "form-title": "Écrivez-nous",
+    "form-name": "Nom et Prénom",
+    "form-email": "Email",
+    "form-phone": "Téléphone",
+    "form-service": "Choisissez un service",
+    "form-service-basic": "Forfait Basique",
+    "form-service-premium": "Forfait Premium",
+    "form-service-vip": "Forfait VIP",
+    "form-service-custom": "Service personnalisé",
+    "form-message": "Message",
+    "form-submit": "Envoyer",
+    "contact-info-title": "Informations de contact",
+    "contact-phone": "Téléphone:",
+    "contact-email": "Email:",
+    "contact-address": "Adresse:",
+    "contact-hours": "Horaires:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSam: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tous droits réservés."
+  },
+  it: {
+    "nav-home": "Home",
+    "nav-services": "Servizi",
+    "nav-gallery": "Galleria",
+    "nav-pricing": "Prezzi",
+    "nav-contact": "Contatto",
+    "hero-title": "Bushido Car Detailing",
+    "hero-subtitle": "Servizi di detailing professionale al massimo livello",
+    "hero-cta": "Contattaci",
+    "services-title": "I Nostri Servizi",
+    "service1-title": "Lavaggio Premium",
+    "service1-desc": "Lavaggio completo esterno ed interno con prodotti professionali di alta qualità.",
+    "service2-title": "Lucidatura",
+    "service2-desc": "Rimozione graffi, ripristino della brillantezza della vernice e protezione dagli agenti esterni.",
+    "service3-title": "Protezione Vernice",
+    "service3-desc": "Applicazione di cere, sigillanti e rivestimenti ceramici per una protezione duratura.",
+    "service4-title": "Pulizia Interni",
+    "service4-desc": "Pulizia professionale di tappezzeria, pelle, plastica ed elementi di finitura.",
+    "service5-title": "Detailing Premium",
+    "service5-desc": "Restauro completo del veicolo con i migliori prodotti e tecniche.",
+    "service6-title": "Manutenzione",
+    "service6-desc": "Cura e manutenzione regolare per mantenere il veicolo in condizioni perfette.",
+    "gallery-title": "Galleria",
+    "pricing-title": "Prezzi",
+    "package1-title": "Pacchetto Base",
+    "package1-item1": "Lavaggio esterno",
+    "package1-item2": "Aspirazione interna",
+    "package1-item3": "Pulizia vetri",
+    "package1-item4": "Cura pneumatici",
+    "package2-title": "Pacchetto Premium",
+    "package2-item1": "Tutto dal Pacchetto Base",
+    "package2-item2": "Pulizia tappezzeria",
+    "package2-item3": "Lucidatura vernice",
+    "package2-item4": "Applicazione cera",
+    "package2-item5": "Pulizia cerchi",
+    "package3-title": "Pacchetto VIP",
+    "package3-item1": "Tutto dal Pacchetto Premium",
+    "package3-item2": "Rivestimento ceramico",
+    "package3-item3": "Pulizia motore",
+    "package3-item4": "Restauro plastiche",
+    "package3-item5": "Garanzia 6 mesi",
+    "contact-title": "Contatto",
+    "form-title": "Scrivici",
+    "form-name": "Nome e Cognome",
+    "form-email": "Email",
+    "form-phone": "Telefono",
+    "form-service": "Scegli servizio",
+    "form-service-basic": "Pacchetto Base",
+    "form-service-premium": "Pacchetto Premium",
+    "form-service-vip": "Pacchetto VIP",
+    "form-service-custom": "Servizio personalizzato",
+    "form-message": "Messaggio",
+    "form-submit": "Invia",
+    "contact-info-title": "Informazioni di contatto",
+    "contact-phone": "Telefono:",
+    "contact-email": "Email:",
+    "contact-address": "Indirizzo:",
+    "contact-hours": "Orari:",
+    "contact-hours-detail": "Lun-Ven: 8:00-18:00\nSab: 9:00-15:00",
+    "footer-text": "© 2025 Bushido Car Detailing. Tutti i diritti riservati."
+  }
+};
+
+function changeLanguage(lang) {
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-translate');
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  localStorage.setItem('selectedLanguage', lang);
+}
+
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', function(e) {
+    e.preventDefault();
+    const lang = this.getAttribute('data-lang');
+    changeLanguage(lang);
+    if (document.getElementById('langToggle')) {
+      document.getElementById('langToggle').innerHTML = '🌐 ' + this.textContent.split(' ')[0];
+    }
+    if (document.getElementById('langMenu')) {
+      document.getElementById('langMenu').classList.remove('active');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('selectedLanguage') || 'pl';
+  changeLanguage(savedLang);
+});
+</script>
+
+</body>
